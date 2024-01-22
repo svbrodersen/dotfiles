@@ -1,0 +1,17 @@
+# Ignore everything
+*
+!.gitignore
+# But not these folders
+
+!/nvim
+nvim/*
+!/nvim/lua
+!/nvim/lua/*
+!/nvim/lua/plugins/*
+!/nvim/lua/config/*
+
+
+!/tmux
+!/tmux/*
+
+
