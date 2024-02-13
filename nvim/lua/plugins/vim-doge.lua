@@ -6,5 +6,6 @@ return {
     vim.g.doge_filetype_aliases = {
       python = { "cython", ".pyx" },
     }
+    vim.g.doge_enable_mappings = 0
   end,
 }
