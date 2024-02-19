@@ -30,9 +30,23 @@ return {
     },
   },
   {
+    "ellisonleao/gruvbox.nvim",
+    config = true,
+    priority = 1000,
+    opts = {
+      transparent_mode = true,
+    },
+  },
+  {
+    "rcarriga/nvim-notify",
+    opts = {
+      background_colour = "#000000",
+    },
+  },
+  {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "kanagawa",
+      colorscheme = "gruvbox",
     },
   },
 }
