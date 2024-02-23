@@ -18,6 +18,14 @@ nvim/*
 
 !/tmux
 !/tmux/*
+!/tmux/plugins/*
+!/tmux/plugins/gruvbox/*
+!/tmux/plugins/tmux-sensible/*
+!/tmux/plugins/tmux-yank/*
+!/tmux/plugins/tpm/*
+!/tmux/vim-tmux-navigator/*
+
+
 
 !/alacritty
 !/alacritty/*
