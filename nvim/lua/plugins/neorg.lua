@@ -13,7 +13,9 @@ return {
           config = {
             workspaces = {
               notes = "~/notes",
+              bachelor = "~/Programming/cs_econ/bachelor/notes",
             },
+            default_workspace = "notes",
           },
         },
       },
