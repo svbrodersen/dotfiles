@@ -1,6 +1,11 @@
 # Ignore everything
 *
 !.gitignore
+
+# Only a copy of the bashrc
+!.bashrc
+
+
 # But not these folders
 
 !/nvim
