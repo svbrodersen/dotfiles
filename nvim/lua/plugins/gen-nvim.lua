@@ -22,13 +22,23 @@ return {
     -- (context property is optional).
     -- list_models = '<omitted lua function>', -- Retrieves a list of model names
     debug = false, -- Prints errors and the command which is run.
+    function()
+      local gen = require("gen.prompts")
+      gen.prompts["Enhance_Grammar_Spelling"] = {
+        prompt = "Modify the following text to improve grammar and spelling, keep any special symbols, characters or links already present, just output the final text without additional quotes around it:\n$text",
+        replace = true,
+      }
+      gen.prompts["Enhance_Wording"] = {
+        prompt = "Modify the following text to use better wording, keep any special symbols, characters or links, just output the final text without additional quotes around it:\n$text",
+        replace = true,
+      }
+    end,
   },
   keys = {
     { "<leader>cc", ":Gen Chat<CR>", desc = "Chat", mode = "n" },
     { "<leader>cC", ":Gen Change_Code<CR>", desc = "Change Code", mode = "v" },
     { "<leader>cR", ":Gen Review_Code<CR>", desc = "Review Code", mode = "v" },
     { "<leader>tg", ":Gen Enhance_Grammar_Spelling<CR>", desc = "Enhance Grammar", mode = "v" },
-    { "<leader>tw", ":Gen Enhance_Wording<CR>", desc = "Enhance Wording", mode = "v" },
     { "<leader>tw", ":Gen Enhance_Wording<CR>", desc = "Enhance Wording", mode = "v" },
     { "<leader>cA", ":Gen Ask<CR>", desc = "Ask text", mode = "v" },
   },
