@@ -1,5 +1,26 @@
 return {
   "David-Kunz/gen.nvim",
+  init = function()
+    require("gen").prompts["Enhance_Grammar_Spelling"] = {
+      prompt = "Modify the following text to improve grammar and spelling, \z
+        keep any special symbols, characters or links already present, just \z
+        output the final text without additional quotes around it or explanations of what was done:\n$text",
+      replace = true,
+    }
+    require("gen").prompts["Enhance_Wording"] = {
+      prompt = "Modify the following text to use better wording, keep any \z
+        special symbols, characters or links, just output the final text without \z
+        additional quotes around it or explanations of what was done:\n$text",
+      replace = true,
+    }
+    require("gen").prompts["Enhance_Prompt"] = {
+      prompt = "Enhance the following text to improve grammar and spellling, \z
+        keep all special characters, symbols or links already present, $input, \z
+        just output the modified text without any other prompt or quotes around \z
+        it or explanations of what was done:\n$text",
+      replace = true,
+    }
+  end,
   opts = {
     model = "dolphin-llama3", -- The default model to use.
     host = "localhost", -- The host running the Ollama service.
@@ -22,24 +43,14 @@ return {
     -- (context property is optional).
     -- list_models = '<omitted lua function>', -- Retrieves a list of model names
     debug = false, -- Prints errors and the command which is run.
-    function()
-      local gen = require("gen.prompts")
-      gen.prompts["Enhance_Grammar_Spelling"] = {
-        prompt = "Modify the following text to improve grammar and spelling, keep any special symbols, characters or links already present, just output the final text without additional quotes around it:\n$text",
-        replace = true,
-      }
-      gen.prompts["Enhance_Wording"] = {
-        prompt = "Modify the following text to use better wording, keep any special symbols, characters or links, just output the final text without additional quotes around it:\n$text",
-        replace = true,
-      }
-    end,
   },
   keys = {
     { "<leader>cc", ":Gen Chat<CR>", desc = "Chat", mode = "n" },
     { "<leader>cC", ":Gen Change_Code<CR>", desc = "Change Code", mode = "v" },
     { "<leader>cR", ":Gen Review_Code<CR>", desc = "Review Code", mode = "v" },
-    { "<leader>tg", ":Gen Enhance_Grammar_Spelling<CR>", desc = "Enhance Grammar", mode = "v" },
-    { "<leader>tw", ":Gen Enhance_Wording<CR>", desc = "Enhance Wording", mode = "v" },
+    { "<leader>cg", ":Gen Enhance_Grammar_Spelling<CR>", desc = "Enhance Grammar", mode = "v" },
+    { "<leader>cw", ":Gen Enhance_Wording<CR>", desc = "Enhance Wording", mode = "v" },
     { "<leader>cA", ":Gen Ask<CR>", desc = "Ask text", mode = "v" },
+    { "<leader>ce", ":Gen Enhance_Prompt<CR>", desc = "Enhance with prompt", mode = "v" },
   },
 }
