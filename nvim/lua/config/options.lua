@@ -13,4 +13,6 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 })
 
 -- Maximum textwidth
+vim.o.textwidth = 80
+vim.o.linebreak = true
 vim.o.wrap = true
