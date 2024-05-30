@@ -14,7 +14,7 @@ return {
       replace = true,
     }
     require("gen").prompts["Enhance_Prompt"] = {
-      prompt = "Enhance the following text to improve grammar and spellling, \z
+      prompt = "Enhance the following text to improve grammar, spellling and wording, \z
         keep all special characters, symbols or links already present, $input, \z
         just output the modified text without any other prompt or quotes around \z
         it or explanations of what was done:\n$text",

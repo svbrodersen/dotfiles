@@ -1,4 +1,4 @@
-import = ["~/themes/gruvbox_material_medium_dark.toml"]
+import = ["./themes/themes/gruvbox_material_medium_dark.toml"]
 
 [window]
 startup_mode = 'Maximized'
@@ -22,3 +22,6 @@ family = 'FiraCode Nerd Font Mono'
 
 [scrolling]
 history = 1000
+
+[env]
+term = "xterm-256color"

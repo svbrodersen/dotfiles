@@ -32,7 +32,7 @@ export EDITOR="nvim"
 export GIT_EDITOR="nvr -cc split --remote-wait +'set bufhidden=wipe'"
 alias vim='nvim --listen /tmp/nvim-server.pipe'
 
-export PATH="/opt/llvm-riscv/bin:$PATH"
+export PATH="/opt/riscv/bin:$PATH"
 export PATH="/usr/local/texlive/2018/bin/x86_64-linux:$PATH"
 export PATH="$PATH:/usr/local/go/bin"
 export PATH MANPATH="/usr/local/texlive/2018/texmf-dist/doc/man:$MANPATH"

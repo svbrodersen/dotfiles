@@ -12,6 +12,8 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   end,
 })
 
+vim.o.termguicolors = true
+
 -- Maximum textwidth
 vim.o.textwidth = 80
 vim.o.linebreak = true
