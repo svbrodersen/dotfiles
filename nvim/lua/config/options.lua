@@ -16,6 +16,4 @@ vim.o.termguicolors = true
 
 -- Maximum textwidth
 vim.o.textwidth = 80
-vim.o.linebreak = true
 vim.o.wrap = true
-vim.o.linebreak = true
