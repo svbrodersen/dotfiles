@@ -41,7 +41,7 @@ export MANPATH INFOPATH="/usr/local/texlive/2018/texmf-dist/doc/info:$INFOPATH"
 export PATH="$PATH:~/Programming/llvm-project/_build/bin/"
 export INFOPATH
 
-export GOPATH="$HOME/go"
+export GOPATH="$HOME/local/go"
 export PATH="$PATH:$GOPATH/bin"
 
 # Overwrite locale settings, as they are somehow wrong
