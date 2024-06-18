@@ -73,10 +73,12 @@ return {
         transparent_mode = true,
         overrides = {
           Cursor = { fg = colors.bright_orange, bg = colors.dark0 },
-          DiffChange = { bg = colors.dark_aqua_hard },
-          DiffText = { bg = colors.faded_yellow, fg = colors.dark0 },
+          DiffviewDiffAddAsDelete = { bg = "#431313" },
+          DiffAdd = { bg = "#142a03" },
+          DiffChange = { bg = colors.dark1, fg = colors.light1 },
+          DiffText = { bg = "#4D520D" },
         },
-        inverse = false,
+        contrast = "soft",
       }
     end,
   },
@@ -89,7 +91,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "kanagawa",
+      colorscheme = "gruvbox",
     },
   },
 }

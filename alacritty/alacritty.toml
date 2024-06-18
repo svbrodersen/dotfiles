@@ -1,10 +1,10 @@
-import = ["./themes/themes/gruvbox_material_medium_dark.toml"]
+import = ["./themes/themes/kanagawa_dragon.toml"]
 
 [window]
 startup_mode = 'Maximized'
 dynamic_padding = true
 decorations = 'full'
-opacity = 0.93
+opacity = 0.97
 
 [window.padding]
 x = 6

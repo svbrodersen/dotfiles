@@ -41,6 +41,8 @@ export MANPATH INFOPATH="/usr/local/texlive/2018/texmf-dist/doc/info:$INFOPATH"
 export PATH="$PATH:~/Programming/llvm-project/_build/bin/"
 export INFOPATH
 
+export PATH="$PATH:~/miniconda3/bin/"
+
 export GOPATH="$HOME/local/go"
 export PATH="$PATH:$GOPATH/bin"
 

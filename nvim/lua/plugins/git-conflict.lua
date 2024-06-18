@@ -4,8 +4,8 @@ return {
   config = true,
   opts = {
     highlights = {
-      current = "DiffText",
       incoming = "DiffAdd",
+      current = "DiffText",
       ancestor = "DiffChange",
     },
   },
