@@ -1,13 +1,15 @@
 lastupdatecheck: 1707127578
 recentrepos:
-- /home/simon/Programming/cs_econ/bachelor
 - /home/simon/dotfiles
+- /home/simon/dotfiles/nvim
 - /home/simon/Programming/adaXT
+- /home/simon/Programming/cs_econ/bachelor
 - /home/simon/Programming/cs_econ
 - /home/simon/Programming/cs_econ/videnskabsteori/aflevering_1
 - /home/simon/Programming/CV
 startuppopupversion: 5
 customcommandshistory:
 - q
+- ""
 hidecommandlog: false
 ignorewhitespaceindiffview: false
