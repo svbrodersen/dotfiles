@@ -52,4 +52,5 @@ export LC_ALL="en_GB.UTF-8"
 export LANG="en_GB.UTF-8"
 export LANGUAGE="en_GB.UTF-8"
 
+alias wezterm='flatpak run org.wezfurlong.wezterm'
 alias config="/usr/bin/git --git-dir=$HOME/dotfiles/.git --work-tree=$HOME/dotfiles"
