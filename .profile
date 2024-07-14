@@ -30,7 +30,6 @@ fi
 export VISUAL="nvim"
 export EDITOR="nvim"
 export GIT_EDITOR="nvr -cc split --remote-wait +'set bufhidden=wipe'"
-export TERM="alacritty"
 alias vim='nvim --listen /tmp/nvim-server.pipe'
 
 export PATH="/opt/riscv/bin:$PATH"
