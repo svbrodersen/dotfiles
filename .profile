@@ -43,6 +43,7 @@ export PATH="$PATH:~/Programming/llvm-project/_build/bin/"
 export INFOPATH
 
 export PATH="$PATH:~/miniconda3/bin/"
+export PATH="$PATH:~/.cargo/bin/"
 
 export GOPATH="$HOME/local/go"
 export PATH="$PATH:$GOPATH/bin"
