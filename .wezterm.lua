@@ -17,9 +17,18 @@ config.font = wezterm.font({
 	harfbuzz_features = { "calt=0", "clig=0", "liga=0" },
 })
 config.bold_brightens_ansi_colors = "No"
-config.window_background_opacity = 0.9
+config.window_background_opacity = 0.95
 config.font_size = 12
 config.enable_tab_bar = false
 config.window_close_confirmation = "NeverPrompt"
 -- and finally, return the configuration to wezterm
+
+config.keys = {
+	{
+		key = "f",
+		mods = "ALT",
+		action = wezterm.action.ToggleFullScreen,
+	},
+}
+
 return config
