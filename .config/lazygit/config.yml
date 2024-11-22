@@ -1,0 +1,10 @@
+os:
+  edit: "nvim {{filename}}"
+  editAtLine: '{{editor}} --server /tmp/nvim-server.pipe --remote-tab --line={{line}} $(pwd)/{{filename}} "'
+
+git:
+  paging:
+    colorArg: always
+    pager: ~/.cargo/bin/delta --dark --paging=never
+gui:
+  showIcons: true

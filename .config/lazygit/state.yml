@@ -1,0 +1,27 @@
+lastupdatecheck: 1707127578
+recentrepos:
+    - /home/simon/dotfiles
+    - /home/simon/Programming/MS_cs
+    - /home/simon/Programming/CV
+    - /home/simon/Programming/adaXT
+    - /home/simon/Programming/MS_cs/AP/Exam
+    - /home/simon/Programming/MS_cs/AP/ap-e2024-pub
+    - /home/simon/Programming/MS_cs/AP/ap-e2024-pub/a5/latex
+    - /home/simon/Programming/mySite
+    - /home/simon/Programming/cs_econ/bachelor
+    - /home/simon/Programming/cs_econ
+    - /home/simon/Programming/cs_econ/videnskabsteori/aflevering_1
+startuppopupversion: 5
+lastversion: 0.44.0
+customcommandshistory:
+    - q
+    - ""
+    - Working on adding contact form
+hidecommandlog: false
+ignorewhitespaceindiffview: false
+diffcontextsize: 1
+renamesimilaritythreshold: 50
+localbranchsortorder: recency
+remotebranchsortorder: alphabetical
+gitlogorder: topo-order
+gitlogshowgraph: always
