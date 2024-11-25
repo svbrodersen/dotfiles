@@ -18,13 +18,13 @@
 
 [merge]
   conflictstyle = diff3
-	tool = nvim
+	tool = nvimdiff
 
 [diff]
   colorMoved = default
 
-[mergetool "nvim"]
-  cmd = "nvim $MERGED"
+[mergetool.nvimdiff]
+  layout = "(LOCAL,BASE,REMOTE)/MERGED"
 
 [mergetool]
   prompt = false
