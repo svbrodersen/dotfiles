@@ -60,7 +60,9 @@ set -o vi
 [ -f "/home/simon/.ghcup/env" ] && . "/home/simon/.ghcup/env" # ghcup-env
 
 # Setup java 21 HOME
-export JAVA_HOME="/usr/lib/jvm/java-21-openjdk-21.0.5.0.11-1.fc41.x86_64/bin/java"
+export JAVA_HOME="/usr/lib/jvm/java-21-openjdk-21.0.5.0.11-1.fc41.x86_64"
+# export JAVA_HOME="/usr/lib/jvm/java-17-openjdk-17.0.13.0.11-3.fc41.x86_64"
+# export JAVA_HOME="/home/simon/jdk-15.0.2"
 
 # setup config
 alias config='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
