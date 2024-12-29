@@ -1,0 +1,9 @@
+!/.config/nvim/**
+!/.config/lazygit/**
+!/.config/tmux/**
+!/.gitconfig
+!/.latexmkrc
+!/.profile
+!/.bashrc
+!/.wezterm.lua
+!/.antrc
