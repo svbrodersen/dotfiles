@@ -1,12 +1,13 @@
 lastupdatecheck: 1707127578
 recentrepos:
+    - /home/simon/Programming/MSc_cs
     - /home/simon/Programming/MSc_cs/ACS
     - /home/simon/Programming/adaXT
     - /home/simon/Programming/mySite
     - /home/simon/Programming/cs_econ/bachelor
     - /home/simon/Programming/cs_econ
 startuppopupversion: 5
-lastversion: 0.44.0
+lastversion: 0.45.2
 customcommandshistory:
     - q
     - ""

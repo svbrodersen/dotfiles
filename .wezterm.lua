@@ -11,7 +11,7 @@ config.color_scheme = "Kanagawa Dragon (Gogh)"
 config.colors = {
 	background = "#141414",
 }
-config.font = wezterm.font({
+config.font = wezterm.font_with_fallback({
 	family = "FiraCode Nerd Font",
 	weight = "Medium",
 	harfbuzz_features = { "calt=0", "clig=0", "liga=0" },
