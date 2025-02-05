@@ -14,38 +14,32 @@ snippet \document
 	\usepackage{csquotes}
 	\usepackage[backend=biber, style=numeric, sorting=nty]{biblatex}
 
-  % Code listing setup
-  \lstdefinestyle{mystyle}{
-    language=Python,
-    basicstyle=\ttfamily\footnotesize,
-    backgroundcolor=\color[HTML]{F7F7F7},
-    rulecolor=\color[HTML]{EEEEEE},
-    identifierstyle=\color[HTML]{24292E},
-    emphstyle=\color[HTML]{005CC5},
-    keywordstyle=\color[HTML]{D73A49},
-    commentstyle=\color[HTML]{6A737D},
-    stringstyle=\color[HTML]{032F62},
-    emph={@property,self,range,True,False},
-    morekeywords={super,with,as,lambda},
-    literate=%
-      {+}{{{\color[HTML]{D73A49}+}}}1
-      {-}{{{\color[HTML]{D73A49}-}}}1
-      {*}{{{\color[HTML]{D73A49}*}}}1
-      {/}{{{\color[HTML]{D73A49}/}}}1
-      {=}{{{\color[HTML]{D73A49}=}}}1
-      {/=}{{{\color[HTML]{D73A49}=}}}1,
-    breakatwhitespace=false,
-    breaklines=true,
-    captionpos=b,
-    keepspaces=true,
-    numbers=none,
-    showspaces=false,
-    showstringspaces=false,
-    showtabs=false,
-    tabsize=4,
-    frame=single,
-  }
-  \lstset{style=mystyle}
+	% Code listing setup
+	\lstdefinestyle{mystyle}{
+		basicstyle=\ttfamily\footnotesize,
+		backgroundcolor=\color[HTML]{F7F7F7},
+		rulecolor=\color[HTML]{EEEEEE},
+		identifierstyle=\color[HTML]{24292E},
+		emphstyle=\color[HTML]{005CC5},
+		keywordstyle=\color[HTML]{D73A49},
+		commentstyle=\color[HTML]{6A737D},
+		stringstyle=\color[HTML]{032F62},
+		emph={@property,self,range,True,False},
+		morekeywords={super,with,as,lambda},
+		breakatwhitespace=false,
+		breaklines=true,
+		captionpos=b,
+		keepspaces=true,
+		numbers=left,
+		keywords={input, output, return, datatype, function, in, if, else, foreach, while, begin, end, }, 
+		showspaces=false,
+		mathescape=true,
+		showstringspaces=false,
+		showtabs=false,
+		tabsize=4,
+		frame=single,
+	}
+	\lstset{style=mystyle}
 
 	\hfuzz=0.64pt % allow a little overfull
 	\hbadness=99999  % or any number >=10000
