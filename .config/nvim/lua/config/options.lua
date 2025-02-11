@@ -11,3 +11,5 @@ vim.o.tabstop = 2
 vim.o.shiftwidth = 2
 vim.o.background = "dark"
 vim.o.updatetime = 1000
+
+vim.g.lazyvim_python_lsp = "basedpyright"
