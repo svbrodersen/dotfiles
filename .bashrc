@@ -98,10 +98,6 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# overwrite apt with nala
-alias apt="\nala"
-alias sudo='sudo '
-
 # Change the logo and color of bash
 GREEN=$(tput setaf 2)
 CYAN=$(tput setaf 214)

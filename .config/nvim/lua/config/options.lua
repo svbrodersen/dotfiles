@@ -12,4 +12,7 @@ vim.o.shiftwidth = 2
 vim.o.background = "dark"
 vim.o.updatetime = 1000
 
-vim.g.lazyvim_python_lsp = "basedpyright"
+vim.g.lazyvim_python_lsp = "pyright"
+
+vim.filetype.add({ extension = { templ = "templ" } })
+vim.lsp.set_log_level("debug")
