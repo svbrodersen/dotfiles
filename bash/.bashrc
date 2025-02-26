@@ -130,3 +130,4 @@ export NVM_DIR="$HOME/.nvm"
 
 [ -s ~/.luaver/luaver ] && . ~/.luaver/luaver
 [ -s ~/.luaver/completions/luaver.bash ] && . ~/.luaver/completions/luaver.bash
+eval "$(zellij setup --generate-auto-start bash)"
