@@ -1,0 +1,15 @@
+snippet tmux tmux standard setup
+	#!/bin/bash
+	session="$1"
+
+	tmux new-session -d -s "\$session"
+
+	# Setup window 1
+	tmux rename-window -t 0 'nvim'
+	tmux send-keys -t 'nvim' "nvim" C-m
+
+	# setup window 2
+	tmux new-window -t "\$session":1 -n 'terminal'
+
+	# Attach session
+	tmux attach-session -t "\$session":0

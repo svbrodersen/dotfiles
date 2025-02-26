@@ -1,0 +1,71 @@
+snippet \document
+	% ! TeX Program = lualatex
+	\documentclass[a4paper, 12pt]{article}
+
+	\usepackage{amsmath}
+	\usepackage{xcolor}
+	\usepackage{amssymb}
+	\usepackage{graphicx}
+	\usepackage{subfiles}
+	\usepackage{listings}
+	\usepackage[english]{babel}
+	\usepackage[toc,page]{appendix}
+
+	\usepackage{csquotes}
+	\usepackage[backend=biber, style=numeric, sorting=nty]{biblatex}
+
+	% Code listing setup
+	\lstdefinestyle{mystyle}{
+		basicstyle=\ttfamily\footnotesize,
+		backgroundcolor=\color[HTML]{F7F7F7},
+		rulecolor=\color[HTML]{EEEEEE},
+		identifierstyle=\color[HTML]{24292E},
+		emphstyle=\color[HTML]{005CC5},
+		keywordstyle=\color[HTML]{D73A49},
+		commentstyle=\color[HTML]{6A737D},
+		stringstyle=\color[HTML]{032F62},
+		emph={@property,self,range,True,False},
+		morekeywords={super,with,as,lambda},
+		breakatwhitespace=false,
+		breaklines=true,
+		captionpos=b,
+		keepspaces=true,
+		numbers=left,
+		keywords={input, output, return, datatype, function, in, if, else, foreach, while, begin, end, }, 
+		showspaces=false,
+		mathescape=true,
+		showstringspaces=false,
+		showtabs=false,
+		tabsize=4,
+		frame=single,
+	}
+	\lstset{style=mystyle}
+
+	\hfuzz=0.64pt % allow a little overfull
+	\hbadness=99999  % or any number >=10000
+
+	\title{${1}}
+	\author{Simon Vinding Brodersen}
+	\date{\today}
+
+	\begin{document}
+	\maketitle
+	\newpage
+
+  ${2}
+
+
+	\end{document}
+
+snippet figure
+  \begin{figure}
+    \begin{center}
+      \includegraphics[width=0.95\textwidth]{./figures/${1}}
+    \end{center}
+    \caption{${2}}\label{fig:${3}}
+  \end{figure}
+
+snippet listing
+  \begin{lstlisting}[language=${1}, caption={${2}}, label={lst:${3}}]
+    ${4}
+  \end{lstlisting}

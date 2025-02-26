@@ -1,0 +1,41 @@
+[credential "https://github.com"]
+	helper =
+	helper = !/usr/bin/gh auth git-credential
+
+[credential "https://gist.github.com"]
+	helper =
+	helper = !/usr/bin/gh auth git-credential
+
+[user]
+	email = simon@3450.dk
+	name = Simon Vinding Brodersen
+
+[init]
+	defaultBranch = main
+
+[core]
+  pager = delta
+
+[merge]
+  conflictstyle = diff3
+	tool = nvimdiff
+
+[diff]
+  colorMoved = default
+
+[mergetool.nvimdiff]
+  layout = "(LOCAL,BASE,REMOTE)/MERGED"
+
+[mergetool]
+  prompt = false
+	keepBackup = false
+
+[interactive]
+  diffFilter = delta --color-only
+
+[delta]
+  line-numbers = true
+  navigate = true
+
+[pull]
+	rebase = false
