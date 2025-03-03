@@ -8,8 +8,8 @@
 # for ssh logins, install and configure the libpam-umask package.
 #umask 022
 
-# if running bash
-if [ -n "$BASH_VERSION" ]; then
+# if running bash and not in zellij
+if [ -n "$BASH_VERSION" ] && [ -z "$ZELLIJ" ]; then
   # include .bashrc if it exists
   if [ -f "$HOME/.bashrc" ]; then
     . "$HOME/.bashrc"
@@ -41,9 +41,6 @@ export MANPATH INFOPATH="/usr/local/texlive/2018/texmf-dist/doc/info:$INFOPATH"
 export PATH="$PATH:$HOME/Programming/llvm-project/_build/bin/"
 export INFOPATH
 
-export PATH="$PATH:$HOME/miniconda3/bin/"
-export PATH="$PATH:$HOME/.cargo/bin/"
-
 export GOPATH="$HOME/local/go"
 export PATH="$PATH:$GOPATH/bin"
 
@@ -66,4 +63,3 @@ export JAVA_HOME="/usr/lib/jvm/java-21-openjdk-21.0.5.0.11-1.fc41.x86_64"
 
 # setup config
 alias config='/usr/bin/lazygit --path ~/dotfiles/'
-alias zel="zellij"

@@ -131,3 +131,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s ~/.luaver/luaver ] && . ~/.luaver/luaver
 [ -s ~/.luaver/completions/luaver.bash ] && . ~/.luaver/completions/luaver.bash
 eval "$(zellij setup --generate-completion bash)"
+
+if [ -n "$ZELLIJ" ]; then
+  source "$HOME/.profile"
+fi
