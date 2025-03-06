@@ -8,3 +8,28 @@ vim.api.nvim_create_autocmd("BufEnter", {
     vim.opt.formatoptions:remove("o")
   end,
 })
+
+vim.api.nvim_create_autocmd("DiffUpdated", {
+  pattern = "*",
+  callback = function()
+    vim.notify(vim.opt.diff:get())
+    if vim.opt.diff:get() then
+      vim.keymap.set("n", "gl", ":diffget LO<CR>", {
+        buffer = true,
+        desc = "Diffget LO",
+      })
+
+      vim.keymap.set("n", "gr", ":diffget RE<CR>", {
+        buffer = true,
+        desc = "Diffget RE",
+      })
+
+      vim.keymap.set("n", "gb", function()
+        vim.cmd("diffget LO | diffget RE")
+      end, {
+        buffer = true,
+        desc = "Diffget BOTH",
+      })
+    end
+  end,
+})

@@ -3,8 +3,3 @@
 -- Add any additional keymaps here
 
 vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]])
-
--- Diff setup keymaps
-vim.keymap.set({ "n", "i", "v" }, "<leader>go", "<cmd>diffget LO<cr>", { desc = "Diffget Ours" })
-vim.keymap.set({ "n", "i", "v" }, "<leader>gt", "<cmd>diffget RE<cr>", { desc = "Diffget Theirs" })
-vim.keymap.set({ "n", "i", "v" }, "<leader>g0", "<cmd>diffget BA<cr>", { desc = "Diffget Base" })
