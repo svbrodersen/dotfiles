@@ -24,7 +24,7 @@
   colorMoved = default
 
 [mergetool.nvimdiff]
-  layout = "(LOCAL,MERGED)/REMOTE"
+  layout = "(LOCAL,REMOTE)/MERGED"
 
 [mergetool]
   prompt = false

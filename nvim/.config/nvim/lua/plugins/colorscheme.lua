@@ -19,6 +19,12 @@ return {
         bright_aqua = "#8bba7f",
         bright_orange = "#f28534",
       },
+      overrides = {
+        DiffAdd = { bg = "#32361a" },
+        DiffChange = { bg = "#222e2a" },
+        DiffDelete = { bg = "#3c1f1e" },
+        DiffText = { bg = "#3b2b0c", fg = "#ebdbb2" },
+      },
     },
   },
   {

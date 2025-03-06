@@ -12,7 +12,6 @@ vim.api.nvim_create_autocmd("BufEnter", {
 vim.api.nvim_create_autocmd("DiffUpdated", {
   pattern = "*",
   callback = function()
-    vim.notify(vim.opt.diff:get())
     if vim.opt.diff:get() then
       vim.keymap.set("n", "gl", ":diffget LO<CR>", {
         buffer = true,

@@ -3,9 +3,11 @@
 -- Add any additional options here
 vim.o.tw = 80
 vim.o.wrap = true
-vim.o.guicursor = "n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50\z
-                    ,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor\z
-                    ,sm:block-blinkwait175-blinkoff150-blinkon175"
+vim.opt.guicursor = {
+  "n-v-c:block-Cursor/lCursor", -- Block cursor in normal, visual, and command modes
+  "i:ver25-blinkwait700-blinkoff400-blinkon250-Cursor/lCursor", -- Blinking vertical line in insert mode
+  "r-cr-o:hor20-Cursor/lCursor", -- Horizontal line cursor in replace, command-line replace, and operator-pending modes
+}
 vim.o.background = "dark"
 vim.o.tabstop = 2
 vim.o.shiftwidth = 2
