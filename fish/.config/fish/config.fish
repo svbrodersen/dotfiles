@@ -8,6 +8,12 @@ if status is-interactive
     fish_add_path -g "$GOPATH/bin"
     fish_add_path -g ~/.local/bin ~/.otherbin /usr/local/sbin
     fish_add_path -g ~/.cargo/bin/
+
+    # Change keybindings
+    bind \cY accept-autosuggestion
+    bind \cP history-search-backward
+    bind \cN history-search-backward
+
     # GOPATH
     #Zellij autocomplete
     eval (zellij setup --generate-completion fish | string collect)
