@@ -14,9 +14,13 @@ if status is-interactive
     bind \cP history-search-backward
     bind \cN history-search-backward
 
-    # GOPATH
     #Zellij autocomplete
     eval (zellij setup --generate-completion fish | string collect)
+
+    # Gitleaks autocomplete
+    eval (gitleaks completion fish | string collect)
+
+
 end
 
 if status --is-login

@@ -12,6 +12,7 @@
 
 [init]
 	defaultBranch = main
+	templateDir = /home/simon/.git-template
 
 [core]
   pager = delta
