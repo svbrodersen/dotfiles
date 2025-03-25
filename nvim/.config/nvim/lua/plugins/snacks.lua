@@ -3,6 +3,7 @@ return {
   opts = {
     scroll = { enabled = false },
     image = {
+      force = true,
       enabled = true,
       doc = {
         float = true,

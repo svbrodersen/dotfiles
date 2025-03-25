@@ -11,8 +11,7 @@ return {
   {
     "yetone/avante.nvim",
     event = "VeryLazy",
-    lazy = true,
-    version = false, -- set this if you want to always pull the latest change
+    version = false, -- Never set this value to "*"! Never!
     opts = {
       -- add any opts here
       mappings = {
@@ -31,9 +30,6 @@ return {
           next = "]c",
           prev = "[c",
         },
-        files = {
-          add_current = prefix .. ".",
-        },
       },
       behaviour = {
         auto_suggestions = false,
@@ -46,13 +42,19 @@ return {
       },
     },
     -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
-    -- dynamically build it, taken from astronvim
-    build = vim.fn.has("win32") == 1 and "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false"
-      or "make",
+    build = "make",
+    -- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
     dependencies = {
-      -- "stevearc/dressing.nvim",
+      "nvim-treesitter/nvim-treesitter",
+      "stevearc/dressing.nvim",
       "nvim-lua/plenary.nvim",
       "MunifTanjim/nui.nvim",
+      --- The below dependencies are optional,
+      "nvim-telescope/telescope.nvim", -- for file_selector provider telescope
+      "hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
+      "ibhagwan/fzf-lua", -- for file_selector provider fzf
+      "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
+      "zbirenbaum/copilot.lua", -- for providers='copilot'
       {
         -- support for image pasting
         "HakonHarnes/img-clip.nvim",
@@ -73,14 +75,10 @@ return {
       {
         -- Make sure to set this up properly if you have lazy=true
         "MeanderingProgrammer/render-markdown.nvim",
-        dependencies = {
-          -- make sure rendering happens even without opening a markdown file first
-          "yetone/avante.nvim",
+        opts = {
+          file_types = { "markdown", "Avante" },
         },
-        opts = function(_, opts)
-          opts.file_types = opts.file_types or { "markdown", "norg", "rmd", "org" }
-          vim.list_extend(opts.file_types, { "Avante" })
-        end,
+        ft = { "markdown", "Avante" },
       },
     },
   },
