@@ -135,3 +135,4 @@ eval "$(zellij setup --generate-completion bash)"
 if [ -n "$ZELLIJ" ]; then
   source "$HOME/.profile"
 fi
+. "$HOME/.cargo/env"

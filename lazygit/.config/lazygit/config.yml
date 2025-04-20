@@ -5,6 +5,6 @@ os:
 git:
   paging:
     colorArg: always
-    pager: ~/.cargo/bin/delta --dark --paging=never
+    pager: delta --dark --paging=never
 gui:
   showIcons: true
