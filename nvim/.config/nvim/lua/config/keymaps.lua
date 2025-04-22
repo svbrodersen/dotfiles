@@ -3,3 +3,4 @@
 -- Add any additional keymaps here
 
 vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]])
+vim.keymap.set("v", "<leader>p", '"_dP', { desc = "keep paste" })

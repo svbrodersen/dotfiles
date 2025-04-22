@@ -6,7 +6,7 @@ if status is-interactive
     set -gx JAVA_HOME "/usr/lib/jvm/java-21-openjdk-21.0.5.0.11-1.fc41.x86_64"
     set -gx GOPATH "$HOME/local/go"
     fish_add_path -g "$GOPATH/bin"
-    fish_add_path -g ~/.local/bin ~/.otherbin /usr/local/sbin
+    fish_add_path -g ~/.local/bin ~/.otherbin /usr/local/sbin ~/local/bin/
     fish_add_path -g ~/.cargo/bin/
 
     # Change keybindings
@@ -26,5 +26,5 @@ if status --is-login
 end
 
 set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME
-set -gx PATH $HOME/.cabal/bin /home/simon/.ghcup/bin $PATH # ghcup-env
 
+set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME ; set -gx PATH $HOME/.cabal/bin /home/simon/.ghcup/bin $PATH # ghcup-env
