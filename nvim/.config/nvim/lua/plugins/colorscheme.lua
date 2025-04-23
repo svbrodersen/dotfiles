@@ -5,8 +5,8 @@ return {
     config = true,
     opts = {
       palette_overrides = {
-        dark0 = "#141414",
-        dark1 = "#141414",
+        dark0 = "#000000",
+        dark1 = "#000000",
         light0 = "#ebdbb2",
         light1 = "#d5c4a1",
         light2 = "#bdae93",
