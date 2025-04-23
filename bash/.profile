@@ -64,4 +64,5 @@ export JAVA_HOME="/usr/lib/jvm/java-21-openjdk-21.0.5.0.11-1.fc41.x86_64"
 alias config='/usr/bin/lazygit --path ~/dotfiles/'
 . "$HOME/.cargo/env"
 
+
 [ -f "/home/simon/.ghcup/env" ] && . "/home/simon/.ghcup/env" # ghcup-env
