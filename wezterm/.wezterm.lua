@@ -9,7 +9,7 @@ local config = wezterm.config_builder()
 -- For example, changing the color scheme:
 config.color_scheme = "GruvboxDarkHard"
 config.colors = {
-	background = "#141414",
+	background = "#050909",
 }
 config.font = wezterm.font_with_fallback({
 	"JetBrains Mono",
