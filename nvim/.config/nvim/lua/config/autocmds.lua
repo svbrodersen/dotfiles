@@ -53,21 +53,21 @@ vim.api.nvim_create_autocmd("DiffUpdated", {
   pattern = "*",
   callback = function()
     if vim.opt.diff:get() then
-      vim.keymap.set("n", "<C-c>l", ":diffget LO<CR>", {
+      vim.keymap.set("n", "<C-c>o", ":diffget LO<CR>", {
         buffer = true,
-        desc = "Diffget LO",
+        desc = "Diffget LO(Ours)",
       })
 
-      vim.keymap.set("n", "<C-c>r", ":diffget RE<CR>", {
+      vim.keymap.set("n", "<C-c>t", ":diffget RE<CR>", {
         buffer = true,
-        desc = "Diffget RE",
+        desc = "Diffget RE(Theirs)",
       })
 
       vim.keymap.set("n", "<C-c>b", function()
         vim.cmd("diffget LO | diffget RE")
       end, {
         buffer = true,
-        desc = "Diffget BOTH",
+        desc = "Diffget Both",
       })
 
       vim.keymap.set("n", "<C-c>n", function()

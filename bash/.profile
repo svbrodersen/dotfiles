@@ -65,4 +65,5 @@ alias config='/usr/bin/lazygit --path ~/dotfiles/'
 . "$HOME/.cargo/env"
 
 
+
 [ -f "/home/simon/.ghcup/env" ] && . "/home/simon/.ghcup/env" # ghcup-env
