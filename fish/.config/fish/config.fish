@@ -1,7 +1,6 @@
 if status is-interactive
     alias config='/usr/bin/lazygit --path ~/dotfiles/'
     set -gx EDITOR nvim
-    set -gx TERM wezterm
 
     set -gx BACKGROUND_COLOR "#050909"
 
@@ -31,5 +30,6 @@ set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME
 
 set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME
 
+set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME
+set -gx PATH $HOME/.cabal/bin /home/simon/.ghcup/bin $PATH # ghcup-env
 
-set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME ; set -gx PATH $HOME/.cabal/bin /home/simon/.ghcup/bin $PATH # ghcup-env
