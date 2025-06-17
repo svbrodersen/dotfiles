@@ -18,3 +18,4 @@ vim.g.lazyvim_python_lsp = "pyright"
 
 vim.filetype.add({ extension = { templ = "templ" } })
 vim.lsp.set_log_level("debug")
+vim.o.scrolloff = 9

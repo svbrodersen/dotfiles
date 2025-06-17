@@ -2,7 +2,7 @@ if status is-interactive
     alias config='/usr/bin/lazygit --path ~/dotfiles/'
     set -gx EDITOR nvim
 
-    set -gx BACKGROUND_COLOR "#050909"
+    set -gx BACKGROUND_COLOR "#141414"
 
     set -gx JAVA_HOME "/usr/lib/jvm/java-21-openjdk-21.0.5.0.11-1.fc41.x86_64"
     set -gx GOPATH "$HOME/local/go"
@@ -32,4 +32,3 @@ set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME
 
 set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME
 set -gx PATH $HOME/.cabal/bin /home/simon/.ghcup/bin $PATH # ghcup-env
-

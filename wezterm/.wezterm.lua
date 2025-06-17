@@ -9,7 +9,7 @@ local config = wezterm.config_builder()
 -- For example, changing the color scheme:
 config.color_scheme = "GruvboxDarkHard"
 config.colors = {
-	background = "#050909",
+	background = "#141414",
 }
 config.font = wezterm.font_with_fallback({
 	"JetBrains Mono",
@@ -28,7 +28,7 @@ config.max_fps = 120
 config.keys = {
 	{
 		key = "f",
-		mods = "ALT",
+		mods = "CTRL | ALT",
 		action = wezterm.action.ToggleFullScreen,
 	},
 }

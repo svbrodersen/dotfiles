@@ -34,7 +34,7 @@ keybinds clear-defaults=true {
                 floating false
             }
         }
-        bind "Ctrl f" { SwitchToMode "normal"; }
+        bind "Ctrl Space" { SwitchToMode "normal"; }
         bind "Ctrl h" {
             MessagePlugin "vim-zellij-navigator" {
                 name "move_focus_or_tab"
@@ -197,7 +197,7 @@ keybinds clear-defaults=true {
         bind "Ctrl Alt x" { CloseFocus; }
     }
     shared_except "locked" "renametab" "renamepane" {
-        bind "Ctrl f" { SwitchToMode "locked"; }
+        bind "Ctrl Space" { SwitchToMode "locked"; }
         bind "Ctrl q" { Quit; }
     }
     shared_except "locked" "entersearch" {
