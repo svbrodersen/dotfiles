@@ -421,11 +421,11 @@ return {
       desc = 'Notification History',
     },
     {
-      '<leader>bd',
+      '<leader>bq',
       function()
         Snacks.bufdelete()
       end,
-      desc = 'Delete Buffer',
+      desc = 'Quit buffer',
     },
     {
       '<leader>gB',

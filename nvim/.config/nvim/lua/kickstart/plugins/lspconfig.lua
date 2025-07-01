@@ -74,11 +74,11 @@ return {
 
           -- Rename the variable under your cursor.
           --  Most Language Servers support renaming across files, etc.
-          map('gln', vim.lsp.buf.rename, 're[n]ame')
+          map('<leader>cr', vim.lsp.buf.rename, '[R]ename')
 
           -- Execute a code action, usually your cursor needs to be on top of an error
           -- or a suggestion from your LSP for this to activate.
-          map('gla', vim.lsp.buf.code_action, 'Goto Code [A]ction', { 'n', 'x' })
+          map('<leader>ca', vim.lsp.buf.code_action, 'Code [A]ction', { 'n', 'x' })
 
           -- This function resolves a difference between neovim nightly (version 0.11) and stable (version 0.10)
           ---@param client vim.lsp.Client
@@ -173,8 +173,8 @@ return {
         gopls = {
           gofumpt = true,
         },
-        -- pyright = {},
-        -- rust_analyzer = {},
+        pyright = {},
+        rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
         -- Some languages (like typescript) have entire language plugins that can be useful:
@@ -182,8 +182,6 @@ return {
         --
         -- But for many setups, the LSP (`ts_ls`) will work just fine
         -- ts_ls = {},
-        --
-
         lua_ls = {
           -- cmd = { ... },
           -- filetypes = { ... },
