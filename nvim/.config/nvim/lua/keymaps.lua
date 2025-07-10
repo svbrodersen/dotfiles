@@ -55,7 +55,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 vim.keymap.set('v', '<leader>p', '"_dP', { desc = 'keep paste' })
 vim.keymap.set('n', '<C-d>', '<C-d>zz')
 vim.keymap.set('n', '<C-u>', '<C-u>zz')
-vim.keymap.set('n', '<leader>bn', function()
+vim.keymap.set('n', '<C-b>n', function()
   vim.ui.input({ prompt = 'Filename: ' }, function(input)
     if input and #input > 0 then
       -- Open the provided filename

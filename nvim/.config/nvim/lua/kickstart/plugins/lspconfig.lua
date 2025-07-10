@@ -79,6 +79,9 @@ return {
           -- Execute a code action, usually your cursor needs to be on top of an error
           -- or a suggestion from your LSP for this to activate.
           map('<leader>ca', vim.lsp.buf.code_action, 'Code [A]ction', { 'n', 'x' })
+          map('<leader>cd', function()
+            vim.diagnostic.open_float(nil, { scope = 'line', focus = false })
+          end, 'Code [D]iagnostics', { 'n', 'x' })
 
           -- This function resolves a difference between neovim nightly (version 0.11) and stable (version 0.10)
           ---@param client vim.lsp.Client

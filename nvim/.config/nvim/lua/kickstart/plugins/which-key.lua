@@ -63,7 +63,6 @@ return {
         { '<leader>g', group = '[G]it', mode = { 'n', 'v' } },
         { '<leader>u', group = '[U]i', mode = { 'n', 'v' } },
         { '<leader>f', group = '[F]ind', mode = { 'n', 'v' } },
-        { '<leader>b', group = '[B]uffer', mode = { 'n', 'v' } },
         { '<leader>c', group = '[C]ode', mode = { 'n', 'v' } },
       },
     },
