@@ -1,0 +1,26 @@
+snippet doc "Standard LaTeX document for CS notes" b
+	\documentclass{article}
+	\usepackage[utf8]{inputenc}
+	\usepackage{amsmath}
+	\usepackage{amssymb}
+	\usepackage{graphicx}
+	\usepackage{listings}
+	\usepackage{hyperref}
+	\usepackage{geometry}
+	\usepackage{enumitem}
+	\usepackage{xcolor}
+
+	\geometry{margin=1in}
+
+	\title{${1:Title}}
+	\author{${2:Author}}
+	\date{${3:\today}}
+
+	\begin{document}
+
+	\maketitle
+
+	${0:Your content here}
+
+	\end{document}
+endsnippet
