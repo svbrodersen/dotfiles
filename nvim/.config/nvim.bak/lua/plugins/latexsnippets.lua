@@ -5,6 +5,5 @@ return {
   config = function()
     require("luasnip-latex-snippets").setup()
     -- or setup({ use_treesitter = true })
-    require("luasnip").config.setup({ enable_autosnippets = true })
   end,
 }
