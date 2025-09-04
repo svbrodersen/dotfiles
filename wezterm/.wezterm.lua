@@ -20,7 +20,6 @@ config.font_size = 12
 config.enable_tab_bar = false
 config.window_close_confirmation = "NeverPrompt"
 
-config.term = "wezterm"
 config.enable_kitty_graphics = true
 config.max_fps = 120
 
