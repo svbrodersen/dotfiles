@@ -240,6 +240,8 @@ return {
           end,
         },
       }
+
+      vim.lsp.enable 'futhark_lsp'
     end,
   },
 }

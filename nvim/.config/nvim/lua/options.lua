@@ -25,7 +25,7 @@ end)
 
 -- Enable break indent
 vim.o.breakindent = true
-vim.o.foldmethod = 'indent'
+vim.o.foldmethod = 'manual'
 
 -- Save undo history
 vim.o.undofile = true
@@ -76,6 +76,8 @@ vim.o.confirm = true
 vim.filetype.add { extension = { templ = 'templ' } }
 vim.o.background = 'dark'
 
+vim.o.expandtab = true
+vim.o.softtabstop = 2
 vim.o.tabstop = 2
 vim.o.shiftwidth = 2
 vim.o.scrolloff = 9
