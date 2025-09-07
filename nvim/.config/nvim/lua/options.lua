@@ -24,6 +24,11 @@ vim.schedule(function()
 end)
 
 -- Enable break indent
+vim.o.shiftwidth = 2
+vim.o.tabstop = 2
+vim.o.softtabstop = 2
+vim.o.expandtab = true
+vim.o.autoindent = true
 vim.o.breakindent = true
 vim.o.foldmethod = 'manual'
 

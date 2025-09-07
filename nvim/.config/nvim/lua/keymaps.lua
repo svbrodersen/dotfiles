@@ -66,3 +66,20 @@ vim.keymap.set('n', '<C-b>n', function()
     end
   end)
 end, { desc = 'New buffer' })
+
+-- Error
+vim.keymap.set('n', ']e', function()
+  vim.diagnostic.jump { count = 1, severity = vim.diagnostic.severity.ERROR }
+end, { desc = 'next error' })
+
+vim.keymap.set('n', '[e', function()
+  vim.diagnostic.jump { count = -1, severity = vim.diagnostic.severity.ERROR }
+end, { desc = 'previous error' })
+
+vim.keymap.set('n', ']d', function()
+  vim.diagnostic.jump { count = 1 }
+end, { desc = 'next diagnostic' })
+
+vim.keymap.set('n', '[d', function()
+  vim.diagnostic.jump { count = -1 }
+end, { desc = 'previous diagnostic' })
