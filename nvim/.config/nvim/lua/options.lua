@@ -76,6 +76,7 @@ vim.o.confirm = true
 vim.filetype.add { extension = { templ = 'templ' } }
 vim.o.background = 'dark'
 
+-- Make tab 2 spaces
 vim.o.expandtab = true
 vim.o.softtabstop = 2
 vim.o.tabstop = 2
