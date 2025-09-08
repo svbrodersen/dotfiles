@@ -19,10 +19,10 @@
 
 [merge]
   conflictstyle = diff3
-	tool = nvimdiff
+	tool = nvimdiffview
 
-[diff]
-  colorMoved = default
+[mergetool.nvimdiffview]
+  cmd = nvim -n -c"DiffviewOpen" "$MERGE"
 
 [mergetool.nvimdiff]
   layout = "(LOCAL,REMOTE)/MERGED"
@@ -30,6 +30,9 @@
 [mergetool]
   prompt = false
 	keepBackup = false
+
+[diff]
+  colorMoved = default
 
 [interactive]
   diffFilter = delta --color-only
