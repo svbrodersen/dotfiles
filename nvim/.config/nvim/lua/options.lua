@@ -81,3 +81,7 @@ vim.o.softtabstop = 2
 vim.o.tabstop = 2
 vim.o.shiftwidth = 2
 vim.o.scrolloff = 9
+
+-- Spelling
+vim.o.spelllang = 'en_us'
+vim.o.spell = true
