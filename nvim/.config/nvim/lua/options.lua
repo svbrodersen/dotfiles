@@ -84,5 +84,6 @@ vim.o.shiftwidth = 2
 vim.o.scrolloff = 9
 
 -- Spelling
-vim.o.spelllang = 'en_us'
-vim.o.spell = true
+
+-- Set global spell option to false initially to disable it for all file types
+vim.o.spell = false
