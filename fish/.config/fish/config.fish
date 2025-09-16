@@ -10,6 +10,7 @@ if status is-interactive
     fish_add_path -g "$GOPATH/bin"
     fish_add_path -g ~/.local/bin ~/.otherbin /usr/local/sbin ~/local/bin/
     fish_add_path -g ~/.cargo/bin/
+    fish_add_path -g ~/.cabal/bin/
 
     # Change keybindings
     bind \cY accept-autosuggestion

@@ -8,9 +8,7 @@
 
 return {
   {
-    -- NOTE: Yes, you can install new plugins here!
     'mfussenegger/nvim-dap',
-    -- NOTE: And you can specify dependencies as well
     dependencies = {
 
       -- Required dependency for nvim-dap-ui
@@ -137,6 +135,8 @@ return {
       --    Don't feel like these are good choices.
       icons = { expanded = '▾', collapsed = '▸', current_frame = '*' },
       controls = {
+        enabled = true,
+        element = 'repl', -- controls in the REPL
         icons = {
           pause = '⏸',
           play = '▶',
@@ -149,14 +149,58 @@ return {
           disconnect = '⏏',
         },
       },
-    },
-    keys = {
-      {
-        '<leader>du',
-        function()
-          require('dapui').toggle {}
-        end,
-        desc = 'Debug: Dap UI',
+      layouts = {
+        {
+          elements = {
+            -- Order matters: top to bottom (or left to right if position = "left")
+            { id = 'scopes', size = 0.4 }, -- variables, enlarged
+            { id = 'watches', size = 0.3 },
+            { id = 'stacks', size = 0.3 },
+          },
+          size = 50, -- width of the left panel
+          position = 'left', -- left or right
+        },
+        {
+          elements = {
+            'repl',
+            'console',
+          },
+          size = 15, -- height of bottom panel
+          position = 'bottom', -- bottom or top
+        },
+      },
+      floating = {
+        max_height = nil, -- adapt to screen
+        max_width = nil,
+        border = 'rounded',
+        mappings = {
+          close = { 'q', '<Esc>' },
+        },
+      },
+      keys = {
+        {
+          '<leader>du',
+          function()
+            require('dapui').toggle {}
+          end,
+          desc = 'Debug: Dap UI',
+        },
+        {
+          'nv',
+          '<leader>dw',
+          function()
+            require('dapui').elements.watches.add(vim.fn.expand '<cword>')
+          end,
+          desc = 'Debug: add element to watches',
+        },
+        {
+          'n',
+          '<leader>dW',
+          function()
+            require('dapui').elements.watches.add()
+          end,
+          desc = 'Debug: add watches',
+        },
       },
     },
     dependencies = {
