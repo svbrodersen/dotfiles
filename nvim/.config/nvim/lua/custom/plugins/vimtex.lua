@@ -8,6 +8,6 @@ return {
     vim.g.vimtex_view_method = 'zathura'
   end,
   keys = {
-    { '<localLeader>l', '', desc = '+vimtext' },
+    { '<localLeader>l', '', ft = 'tex', desc = '+vimtext' },
   },
 }
