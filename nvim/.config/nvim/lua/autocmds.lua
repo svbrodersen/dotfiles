@@ -16,3 +16,14 @@ vim.api.nvim_create_autocmd({ 'FileType' }, {
   end,
   desc = 'Enable spellcheck for defined filetypes', -- Description for clarity
 })
+
+vim.api.nvim_create_autocmd('WinEnter', {
+  callback = function()
+    if vim.fn.winnr '$' > 1 then
+      vim.keymap.set('n', '<Up>', '<C-w>+', { silent = true })
+      vim.keymap.set('n', '<Down>', '<C-w>-', { silent = true })
+      vim.keymap.set('n', '<Left>', '<C-w><', { silent = true })
+      vim.keymap.set('n', '<Right>', '<C-w>>', { silent = true })
+    end
+  end,
+})

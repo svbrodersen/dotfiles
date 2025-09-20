@@ -1,17 +1,13 @@
 return {
   {
     'mrcjkb/haskell-tools.nvim',
-    version = '^3',
+    version = '^6', -- or '^3' for older setups
     ft = { 'haskell', 'lhaskell', 'cabal', 'cabalproject' },
     dependencies = {
-      { 'nvim-telescope/telescope.nvim', optional = true },
+      'nvim-lua/plenary.nvim',
+      'nvim-telescope/telescope.nvim', -- optional
+      'mfussenegger/nvim-dap', -- Required for debugging
     },
-    config = function()
-      local ok, telescope = pcall(require, 'telescope')
-      if ok then
-        telescope.load_extension 'ht'
-      end
-    end,
   },
   {
     'mrcjkb/haskell-snippets.nvim',

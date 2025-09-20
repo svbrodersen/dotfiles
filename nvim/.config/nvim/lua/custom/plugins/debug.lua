@@ -20,8 +20,6 @@ return {
 
       -- Add your own debuggers here
       'leoluz/nvim-dap-go',
-      'phoityne/haskell-debug-adapter',
-
       'mfussenegger/nvim-dap-python',
     },
     keys = {
