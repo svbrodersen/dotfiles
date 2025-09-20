@@ -178,7 +178,20 @@ return {
         },
         pyright = {},
         rust_analyzer = {},
-        clangd = {},
+        clangd = {
+          on_attach = function(client, bufnr)
+            if vim.bo[bufnr].filetype == 'cuda' then
+              client.notify('textDocument/didOpen', {
+                textDocument = {
+                  uri = vim.uri_from_bufnr(bufnr),
+                  languageId = 'cuda', -- Tell clangd this is CUDA
+                  version = 0,
+                  text = table.concat(vim.api.nvim_buf_get_lines(bufnr, 0, -1, false), '\n'),
+                },
+              })
+            end
+          end,
+        },
         neocmake = {},
         jdtls = {},
         tailwindcss = {
