@@ -178,6 +178,35 @@ return {
       desc = 'Grep',
     },
     {
+      '<leader>sG',
+      function()
+        local cwd = vim.fn.getcwd()
+        local dirs = vim.fn.globpath(cwd, '**/', false, true)
+
+        if #dirs == 0 then
+          print('No subdirectories found in ' .. cwd)
+          return
+        end
+
+        -- Convert to relative paths
+        for i, dir in ipairs(dirs) do
+          dirs[i] = vim.fn.fnamemodify(dir, ':.') -- ":." makes it relative to cwd
+          dirs[i] = dirs[i]:gsub('/$', '') -- remove trailing slash
+        end
+
+        vim.ui.select(dirs, {
+          prompt = 'Select a subdirectory:',
+        }, function(choice)
+          if choice then
+            -- Construct full path for grep
+            local full_path = cwd .. '/' .. choice
+            require('snacks.picker').grep { cwd = full_path }
+          end
+        end)
+      end,
+      desc = 'Grep',
+    },
+    {
       '<leader>sw',
       function()
         Snacks.picker.grep_word()
