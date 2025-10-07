@@ -20,7 +20,6 @@ return {
 
       -- Add your own debuggers here
       'leoluz/nvim-dap-go',
-      'mfussenegger/nvim-dap-python',
     },
     keys = {
       -- Basic debugging keymaps, feel free to change to your liking!
@@ -204,7 +203,6 @@ return {
     dependencies = {
       'jay-babu/mason-nvim-dap.nvim',
       'leoluz/nvim-dap-go',
-      'mfussenegger/nvim-dap-python',
       'theHamsta/nvim-dap-virtual-text',
     },
   },
