@@ -1,0 +1,9 @@
+snippet errw "Error wrap"
+  if err != nil {
+    return fmt.Errorf("${1:wrap}: %w", err)
+  }
+
+snippet err "Error"
+  if err != nil {
+    ${1:error}
+  }
