@@ -8,7 +8,7 @@ config.enable_wayland = false
 
 config.color_scheme = 'Gruvbox Material (Gogh)'
 config.colors = {
-	background = "#141414",
+	background = "#111111",
 }
 config.font = wezterm.font 'JetBrains Mono'
 config.font_size = 12.0
