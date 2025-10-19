@@ -1,7 +1,6 @@
 return {
   {
     'mrcjkb/haskell-tools.nvim',
-    version = '^6', -- or '^3' for older setups
     ft = { 'haskell', 'lhaskell', 'cabal', 'cabalproject' },
     dependencies = {
       'nvim-lua/plenary.nvim',

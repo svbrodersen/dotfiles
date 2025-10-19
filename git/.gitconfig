@@ -42,4 +42,4 @@
   navigate = true
 
 [pull]
-	rebase = false
+	rebase = true
