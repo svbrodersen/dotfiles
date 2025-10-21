@@ -23,6 +23,17 @@ if status is-interactive
     # Gitleaks autocomplete
     eval (gitleaks completion fish | string collect)
 
+  function fish_prompt
+      # Prompt status only if it's not 0
+      set -l last_status $status
+      set -l stat
+      if test $last_status -ne 0
+          set stat (set_color red)"[$last_status]"(set_color normal)
+      end
+      set -l __fish_git_prompt_color purple
+      string join '' -- (whoami) (set_color green) '@' (set_color red) (prompt_hostname) (set_color normal) " " (fish_git_prompt) \n $stat '> '
+  end
+
 end
 
 if status --is-login
