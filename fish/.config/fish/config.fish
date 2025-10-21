@@ -30,8 +30,13 @@ if status is-interactive
       if test $last_status -ne 0
           set stat (set_color red)"[$last_status]"(set_color normal)
       end
-      set -l __fish_git_prompt_color purple
-      string join '' -- (whoami) (set_color green) '@' (set_color red) (prompt_hostname) (set_color normal) " " (fish_git_prompt) \n $stat '> '
+      set -g __fish_git_prompt_show_informative_status 1
+      set -g __fish_git_prompt_showcolorhints 1
+      set -g __fish_git_prompt_color purple
+      set -g __fish_git_prompt_showupstream informative
+      
+
+      string join '' -- (whoami) (set_color green) '@' (set_color red) (prompt_hostname) (set_color normal)  (fish_git_prompt)  \n $stat '> '
   end
 
 end
