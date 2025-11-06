@@ -223,6 +223,13 @@ return {
         end,
         desc = 'Debug: Test',
       },
+      {
+        '<leader>dL',
+        function()
+          require('dap-go').debug_last_test()
+        end,
+        desc = 'Debug: Last Test',
+      },
     },
   },
 }

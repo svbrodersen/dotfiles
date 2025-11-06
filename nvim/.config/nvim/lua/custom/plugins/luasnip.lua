@@ -12,6 +12,9 @@ return {
   opts = {
     history = true,
     delete_check_events = "TextChanged",
+    filetype_extend = {
+      markdown = {"html"},
+    }
   },
   config = function()
     require('luasnip.loaders.from_snipmate').load { paths = vim.fn.stdpath("config") .. "/snippets" }

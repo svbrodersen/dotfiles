@@ -3,6 +3,14 @@ return {
   priority = 1000,
   lazy = false,
   ---@type snacks.Config
+  ---
+  dependencies = {
+    -- In your lazy.nvim plugin list
+    {
+      'nvim-tree/nvim-web-devicons',
+      lazy = true,
+    },
+  },
   opts = {
     -- your configuration comes here
     -- or leave it empty to use the default settings
@@ -17,6 +25,7 @@ return {
     quickfile = { enabled = true },
     scope = { enabled = true },
     words = { enabled = true },
+    icons = {enabled = true}
   },
   keys = {
     -- Top Pickers & Explorer
@@ -26,6 +35,13 @@ return {
         Snacks.picker.smart()
       end,
       desc = 'Smart Find Files',
+    },
+    {
+      '<leader>st',
+      function()
+        Snacks.picker.todo_comments()
+      end,
+      desc = 'Find Todo',
     },
     {
       '<leader>,',

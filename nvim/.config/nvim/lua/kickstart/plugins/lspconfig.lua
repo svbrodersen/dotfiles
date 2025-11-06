@@ -197,7 +197,6 @@ return {
         tailwindcss = {
           filetypes_exclude = { 'markdown' },
         },
-        html = {},
         emmet_language_server = {},
         markdownlint = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
