@@ -83,6 +83,29 @@ return {
             vim.diagnostic.open_float(nil, { scope = 'line', focus = false })
           end, 'Code [D]iagnostics', { 'n', 'x' })
 
+          local Snacks = require 'snacks'
+          map('gd', function()
+            Snacks.picker.lsp_definitions()
+          end, 'Goto Definition')
+          map('gD', function()
+            Snacks.picker.lsp_declarations()
+          end, 'Goto Declaration')
+          map('gr', function()
+            Snacks.picker.lsp_references()
+          end, 'References')
+          map('gI', function()
+            Snacks.picker.lsp_implementations()
+          end, 'Goto Implementation')
+          map('gy', function()
+            Snacks.picker.lsp_type_definitions()
+          end, 'Goto T[y]pe Definition')
+          map('<leader>ss', function()
+            Snacks.picker.lsp_symbols()
+          end, 'LSP Symbols')
+          map('<leader>sS', function()
+            Snacks.picker.lsp_workspace_symbols()
+          end, 'LSP Workspace Symbols')
+
           -- This function resolves a difference between neovim nightly (version 0.11) and stable (version 0.10)
           ---@param client vim.lsp.Client
           ---@param method vim.lsp.protocol.Method
@@ -176,8 +199,10 @@ return {
         gopls = {
           gofumpt = true,
         },
+        rust_analyzer = {
+          autostart = false,
+        },
         pyright = {},
-        rust_analyzer = {},
         clangd = {
           on_attach = function(client, bufnr)
             if vim.bo[bufnr].filetype == 'cuda' then
@@ -257,6 +282,7 @@ return {
       }
 
       vim.lsp.enable 'futhark_lsp'
+      vim.lsp.enable("rust_analyzer", false)
     end,
   },
 }
