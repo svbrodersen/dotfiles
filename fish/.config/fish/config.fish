@@ -34,22 +34,20 @@ if status is-interactive
       set -g __fish_git_prompt_showcolorhints 1
       set -g __fish_git_prompt_color purple
       set -g __fish_git_prompt_showupstream informative
-      
 
       string join '' -- (whoami) (set_color green) '@' (set_color red) (prompt_hostname) (set_color green) ":" (prompt_pwd) (set_color normal)  (fish_git_prompt)  \n $stat '> '
   end
+
+  # Haskell stuff
+  set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME
+  fish_add_path -g $HOME/.cabal/bin
+  fish_add_path -g $HOME/.ghcup/bin
 
 end
 
 if status --is-login
 end
 
-set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME
-
-set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME
-
-set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME
-set -gx PATH $HOME/.cabal/bin /home/simon/.ghcup/bin $PATH # ghcup-env
 
 # pnpm
 set -gx PNPM_HOME "/home/simon/.local/share/pnpm"
