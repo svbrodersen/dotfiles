@@ -27,11 +27,11 @@ return {
         desc = 'Debug',
       },
       {
-        '<leader>db',
+        '<leader>dt',
         function()
           require('dap').toggle_breakpoint()
         end,
-        desc = 'toggle breakpoint',
+        desc = 'Toggle breakpoint',
       },
     },
     config = function()
@@ -174,18 +174,18 @@ return {
     },
     keys = {
       {
-        '<leader>dt',
+        '<leader>dT',
         function()
           require('dap-go').debug_test()
         end,
-        desc = 'Debug: Test',
+        desc = 'Test',
       },
       {
         '<leader>dl',
         function()
           require('dap-go').debug_last_test()
         end,
-        desc = 'Debug: Last Test',
+        desc = 'Last Test',
       },
     },
   },

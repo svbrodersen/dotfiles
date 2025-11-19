@@ -24,7 +24,7 @@ return {
         { 'o', dap.step_out, { silent = true } },
         { 'c', dap.continue, { silent = true } },
         { 'r', dap.run_to_cursor, { silent = true } },
-        { 'b', dap.toggle_breakpoint, { silent = true } },
+        { 't', dap.toggle_breakpoint, { silent = true } },
         { 'x', dap.terminate, { exit = true, silent = true } },
         { 'q', nil, { exit = true } },
       }
