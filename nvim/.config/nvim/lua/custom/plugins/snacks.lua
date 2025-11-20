@@ -25,7 +25,7 @@ return {
     quickfile = { enabled = true },
     scope = { enabled = true },
     words = { enabled = true },
-    icons = {enabled = true}
+    icons = { enabled = true },
   },
   keys = {
     -- Top Pickers & Explorer
@@ -196,31 +196,53 @@ return {
     {
       '<leader>sG',
       function()
-        local cwd = vim.fn.getcwd()
-        local dirs = vim.fn.globpath(cwd, '**/', false, true)
-
-        if #dirs == 0 then
-          print('No subdirectories found in ' .. cwd)
+        -- 1. Check if 'fd' is available
+        if vim.fn.executable 'fd' == 0 then
+          print "Error: 'fd' executable not found. Please install it for this feature."
           return
         end
 
-        -- Convert to relative paths
-        for i, dir in ipairs(dirs) do
-          dirs[i] = vim.fn.fnamemodify(dir, ':.') -- ":." makes it relative to cwd
-          dirs[i] = dirs[i]:gsub('/$', '') -- remove trailing slash
+        local cwd = vim.fn.getcwd()
+
+        -- 2. Use 'fd' to find directories ('-t d')
+        -- This is much faster than globpath and respects .gitignore
+        local fd_cmd = 'fd -t d'
+        local dirs_string = vim.fn.system(fd_cmd) -- This is synchronous but 'fd' is very fast
+
+        if dirs_string == '' or dirs_string == nil then
+          print('No subdirectories found by fd in ' .. cwd)
+          return
         end
 
-        vim.ui.select(dirs, {
+        -- 3. Split the newline-separated string into a table
+        local dirs = vim.fn.split(dirs_string, '\n')
+
+        -- 4. Clean up the list
+        local final_dirs = {}
+        for _, dir in ipairs(dirs) do
+          -- Filter out empty strings and the root directory '.'
+          if dir ~= '' and dir ~= '.' then
+            table.insert(final_dirs, dir)
+          end
+        end
+
+        if #final_dirs == 0 then
+          print('No subdirectories found (excluding root) in ' .. cwd)
+          return
+        end
+
+        -- 5. Show the picker
+        vim.ui.select(final_dirs, {
           prompt = 'Select a subdirectory:',
         }, function(choice)
           if choice then
-            -- Construct full path for grep
+            -- 'choice' is already relative
             local full_path = cwd .. '/' .. choice
             require('snacks.picker').grep { cwd = full_path }
           end
         end)
       end,
-      desc = 'Grep',
+      desc = 'Grep in Subdirectory (Fast)',
     },
     {
       '<leader>sw',
