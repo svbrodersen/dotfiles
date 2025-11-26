@@ -102,7 +102,7 @@ install_dev_tools() {
     fi
 
     echo "Installing ghostty"
-    if enable_copy "scottames/ghostty"; then
+    if enable_copr "scottames/ghostty"; then
       sudo dnf install -y ghostty
     fi
 
