@@ -12,6 +12,12 @@ if status is-interactive
     fish_add_path -g ~/.cargo/bin/
     fish_add_path -g ~/.cabal/bin/
 
+    # add cuda stuff
+    fish_add_path -g /usr/local/cuda-13/bin/
+    set -x CFLAGS "-I/usr/local/cuda-13/include"
+    set -x LD_LIBRARY_PATH "/usr/local/cuda-13/lib64" $LD_LIBRARY_PATH
+    set -x LIBRARY_PATH "/usr/local/cuda-13/lib64" $LIBRARY_PATH
+
     # Change keybindings
     bind \cY accept-autosuggestion
     bind \cP history-search-backward
