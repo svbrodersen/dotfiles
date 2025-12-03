@@ -83,7 +83,5 @@ vim.o.tabstop = 2
 vim.o.shiftwidth = 2
 vim.o.scrolloff = 9
 
--- Spelling
-
 -- Set global spell option to false initially to disable it for all file types
 vim.o.spell = false

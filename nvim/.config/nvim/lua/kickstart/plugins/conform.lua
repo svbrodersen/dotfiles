@@ -18,7 +18,6 @@ return {
       format_on_save = nil,
       formatters = {
         futhark_fmt = {
-          inherit = false,
           command = 'futhark',
           args = { 'fmt', '$FILENAME' },
           stdin = false,
