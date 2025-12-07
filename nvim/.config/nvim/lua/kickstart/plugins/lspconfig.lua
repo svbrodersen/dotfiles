@@ -83,28 +83,30 @@ return {
             vim.diagnostic.open_float(nil, { scope = 'line', focus = false })
           end, 'Code [D]iagnostics', { 'n', 'x' })
 
-          local Snacks = require 'snacks'
-          map('gd', function()
-            Snacks.picker.lsp_definitions()
-          end, 'Goto Definition')
-          map('gD', function()
-            Snacks.picker.lsp_declarations()
-          end, 'Goto Declaration')
-          map('gr', function()
-            Snacks.picker.lsp_references()
-          end, 'References')
-          map('gI', function()
-            Snacks.picker.lsp_implementations()
-          end, 'Goto Implementation')
-          map('gy', function()
-            Snacks.picker.lsp_type_definitions()
-          end, 'Goto T[y]pe Definition')
-          map('<leader>ss', function()
-            Snacks.picker.lsp_symbols()
-          end, 'LSP Symbols')
-          map('<leader>sS', function()
-            Snacks.picker.lsp_workspace_symbols()
-          end, 'LSP Workspace Symbols')
+          local fzf = require 'fzf-lua'
+          local map = vim.keymap.set
+
+          map('n', 'gd', function()
+            fzf.lsp_definitions()
+          end, { desc = 'Goto Definition' })
+          map('n', 'gD', function()
+            fzf.lsp_declarations()
+          end, { desc = 'Goto Declaration' })
+          map('n', 'gr', function()
+            fzf.lsp_references()
+          end, { desc = 'References' })
+          map('n', 'gI', function()
+            fzf.lsp_implementations()
+          end, { desc = 'Goto Implementation' })
+          map('n', 'gy', function()
+            fzf.lsp_typedefs()
+          end, { desc = 'Goto Type Definition' })
+          map('n', '<leader>ss', function()
+            fzf.lsp_document_symbols()
+          end, { desc = 'LSP Symbols' })
+          map('n', '<leader>sS', function()
+            fzf.lsp_workspace_symbols()
+          end, { desc = 'LSP Workspace Symbols' })
 
           -- This function resolves a difference between neovim nightly (version 0.11) and stable (version 0.10)
           ---@param client vim.lsp.Client
@@ -282,7 +284,7 @@ return {
       }
 
       vim.lsp.enable 'futhark_lsp'
-      vim.lsp.enable("rust_analyzer", false)
+      vim.lsp.enable('rust_analyzer', false)
     end,
   },
 }
