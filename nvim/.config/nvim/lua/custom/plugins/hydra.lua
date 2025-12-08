@@ -52,10 +52,10 @@ return {
       mode = 'n', -- normal mode
       body = 'g<C-w>', -- activate hydra after pressing Ctrl-w
       heads = {
-        { 'h', '5<C-w><', { desc = 'Resize Left' } },
-        { 'l', '5<C-w>>', { desc = 'Resize Right' } },
-        { 'j', '5<C-w>+', { desc = 'Resize Down' } },
-        { 'k', '5<C-w>-', { desc = 'Resize Up' } },
+        { 'h', '2<C-w><', { desc = 'Resize Left' } },
+        { 'l', '2<C-w>>', { desc = 'Resize Right' } },
+        { 'j', '2<C-w>+', { desc = 'Resize Down' } },
+        { 'k', '2<C-w>-', { desc = 'Resize Up' } },
         { '<Esc>', nil, { exit = true, desc = 'Exit Hydra' } },
       },
       config = {
