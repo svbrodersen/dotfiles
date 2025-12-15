@@ -3,22 +3,17 @@
 -- Shows how to use the DAP plugin to debug your code.
 --
 -- Primarily focused on configuring the debugger for Go, but can
--- be extended to other languages as well. That's why it's called
--- kickstart.nvim and not kitchen-sink.nvim ;)
+-- be extended to other languages as well.
 
 return {
   {
     'mfussenegger/nvim-dap',
     dependencies = {
-
-      -- Required dependency for nvim-dap-ui
+      'nvim-neotest/nvim-nio',
       'theHamsta/nvim-dap-virtual-text',
-
-      -- Installs the debug adapters for you
+      'rcarriga/nvim-dap-ui',
       'mason-org/mason.nvim',
       'jay-babu/mason-nvim-dap.nvim',
-
-      -- Add your own debuggers here
       'leoluz/nvim-dap-go',
     },
     keys = {
@@ -34,40 +29,72 @@ return {
         desc = 'Toggle breakpoint',
       },
       {
-        '<leader>dn',
-        '<cmd>DapNew<cr>',
-        desc = 'Dap New',
+        '<leader>dc',
+        function()
+          require('dap').continue()
+        end,
+        desc = 'Continue',
+      },
+      {
+        '<leader>di',
+        function()
+          require('dap').step_into()
+        end,
+        desc = 'Step Into',
+      },
+      {
+        '<leader>do',
+        function()
+          require('dap').step_over()
+        end,
+        desc = 'Step Over',
+      },
+      {
+        '<leader>dO',
+        function()
+          require('dap').step_out()
+        end,
+        desc = 'Step Out',
+      },
+      {
+        '<leader>db',
+        function()
+          require('dap').step_back()
+        end,
+        desc = 'Step Back',
+      },
+      {
+        '<leader>dr',
+        function()
+          require('dap').restart()
+        end,
+        desc = 'Restart',
       },
     },
     config = function()
       local dap = require 'dap'
-      local dapui = require 'dapui'
-      local Hydra = require 'hydra'
 
+      -- Setup mason-nvim-dap first
       require('mason-nvim-dap').setup {
-        -- Makes a best effort to setup the various debuggers with
-        -- reasonable debug configurations
         automatic_installation = true,
-
-        -- You can provide additional configuration to the handlers,
-        -- see mason-nvim-dap README for more information
-        handlers = {
-          function(config)
-            require('mason-nvim-dap').default_setup(config)
-          end,
-        },
-
-        -- You'll need to check that you have the required things installed
-        -- online, please don't ask me how to install them :)
+        handlers = {},
         ensure_installed = {
-          -- Update this to ensure that you have the debuggers for the langs you want
           'delve',
           'codelldb',
         },
       }
 
-      dap.configurations = {
-        cpp = {
+      -- Setup language-specific adapters
+      require('dap-go').setup {
+        delve = {
+          detached = vim.fn.has 'win32' == 0,
+        },
+      }
+
+      -- Configure C/C++/Rust debugging
+      -- FIXED: This should be an array of configurations
+      dap.configurations.cpp = {
+        {
           name = 'Launch file',
           type = 'codelldb',
           request = 'launch',
@@ -77,9 +104,9 @@ return {
           cwd = '${workspaceFolder}',
           stopOnEntry = false,
         },
-        rust = dap.configurations.cpp,
-        c = dap.configurations.cpp
       }
+      dap.configurations.c = dap.configurations.cpp
+      dap.configurations.rust = dap.configurations.cpp
     end,
   },
   {
@@ -157,27 +184,26 @@ return {
   },
   {
     'leoluz/nvim-dap-go',
-    opts = {
-      delve = {
-        -- On Windows delve must be run attached or it crashes.
-        -- See https://github.com/leoluz/nvim-dap-go/blob/main/README.md#configuring
-        detached = vim.fn.has 'win32' == 0,
-      },
+    dependencies = {
+      'mfussenegger/nvim-dap',
     },
+    ft = 'go',
     keys = {
       {
         '<leader>dT',
         function()
           require('dap-go').debug_test()
         end,
-        desc = 'Test',
+        desc = 'Debug Go Test',
+        ft = 'go',
       },
       {
         '<leader>dl',
         function()
           require('dap-go').debug_last_test()
         end,
-        desc = 'Last Test',
+        desc = 'Debug Last Go Test',
+        ft = 'go',
       },
     },
   },
