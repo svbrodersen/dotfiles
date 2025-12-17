@@ -32,7 +32,9 @@ return {
     {
       '<leader><space>',
       function()
-        Snacks.picker.smart()
+        Snacks.picker.smart({
+          layout = {preset = "default", preview = false}
+        })
       end,
       desc = 'Smart Find Files',
     },
@@ -89,7 +91,9 @@ return {
     {
       '<leader>ff',
       function()
-        Snacks.picker.files()
+        Snacks.picker.files({
+          layout = {preset = "default", preview = false}
+        })
       end,
       desc = 'Find Files',
     },
