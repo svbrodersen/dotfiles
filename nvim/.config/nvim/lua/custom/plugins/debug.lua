@@ -4,14 +4,29 @@
 --
 -- Primarily focused on configuring the debugger for Go, but can
 -- be extended to other languages as well.
+--
+
+local function make_repeatable(action_name, action_fn)
+  return function()
+    -- Create a global wrapper for the action
+    _G[action_name] = function()
+      action_fn()
+    end
+
+    -- Set the operatorfunc to call that wrapper
+    vim.go.operatorfunc = 'v:lua.' .. action_name
+
+    -- Execute 'g@l' (call operator on current char)
+    -- This records the action so '.' can repeat it
+    vim.cmd.normal { 'g@l', bang = true }
+  end
+end
 
 return {
   {
     'mfussenegger/nvim-dap',
     dependencies = {
-      'nvim-neotest/nvim-nio',
       'theHamsta/nvim-dap-virtual-text',
-      'rcarriga/nvim-dap-ui',
       'mason-org/mason.nvim',
       'jay-babu/mason-nvim-dap.nvim',
       'leoluz/nvim-dap-go',
@@ -31,35 +46,40 @@ return {
       {
         '<leader>dc',
         function()
-          require('dap').continue()
+          local dap = require 'dap'
+          make_repeatable('dap_continue', dap.continue)
         end,
         desc = 'Continue',
       },
       {
         '<leader>di',
         function()
-          require('dap').step_into()
+          local dap = require 'dap'
+          make_repeatable('dap_step_into', dap.step_into)
         end,
         desc = 'Step Into',
       },
       {
         '<leader>do',
         function()
-          require('dap').step_over()
+          local dap = require 'dap'
+          make_repeatable('dap_step_over', dap.step_over)
         end,
         desc = 'Step Over',
       },
       {
         '<leader>dO',
         function()
-          require('dap').step_out()
+          local dap = require 'dap'
+          make_repeatable('dap_step_out', dap.step_out)
         end,
         desc = 'Step Out',
       },
       {
         '<leader>db',
         function()
-          require('dap').step_back()
+          local dap = require 'dap'
+          make_repeatable('dap_step_back', dap.step_back)
         end,
         desc = 'Step Back',
       },
@@ -73,7 +93,6 @@ return {
     },
     config = function()
       local dap = require 'dap'
-
       -- Setup mason-nvim-dap first
       require('mason-nvim-dap').setup {
         automatic_installation = true,
@@ -117,11 +136,17 @@ return {
     },
   },
   {
-    'rcarriga/nvim-dap-ui',
-    config = function()
-      local ui = require 'dapui'
+    'igorlfs/nvim-dap-view',
+    dependencies = {
+      'mfussenegger/nvim-dap',
+    },
+    opts = {
+      -- Automatically open/close the view when debugging starts/stops
+      auto_toggle = true,
+    },
+    config = function(_, opts)
       local dap = require 'dap'
-      ui.setup()
+      require('dap-view').setup(opts)
 
       -- Change breakpoint icons
       vim.api.nvim_set_hl(0, 'DapBreak', { fg = '#e51400' })
@@ -135,51 +160,47 @@ return {
         vim.fn.sign_define(tp, { text = icon, texthl = hl, numhl = hl })
       end
 
-      dap.listeners.before.attach.dapui_config = function()
-        ui.open()
-      end
-      dap.listeners.before.launch.dapui_config = function()
-        ui.open()
-      end
-      dap.listeners.before.event_terminated.dapui_config = function()
-        ui.close()
-      end
-      dap.listeners.before.event_exited.dapui_config = function()
-        ui.close()
+      -- Set K to hover widgets
+      local api = vim.api
+      local keymap_restore = {}
+      dap.listeners.after['event_initialized']['me'] = function()
+        for _, buf in pairs(api.nvim_list_bufs()) do
+          local keymaps = api.nvim_buf_get_keymap(buf, 'n')
+          for _, keymap in pairs(keymaps) do
+            if keymap.lhs == 'K' then
+              table.insert(keymap_restore, keymap)
+              api.nvim_buf_del_keymap(buf, 'n', 'K')
+            end
+          end
+        end
+        api.nvim_set_keymap('n', 'K', '<Cmd>lua require("dap.ui.widgets").hover()<CR>', { silent = true })
       end
     end,
-    opts = {},
     keys = {
       {
         '<leader>du',
         function()
-          require('dapui').toggle()
+          require('dap-view').toggle()
         end,
-        desc = 'Debug: Dap UI',
+        desc = 'Debug: Toggle Dap View',
         mode = 'n',
       },
       {
         '<leader>dw',
         function()
-          require('dapui').elements.watches.add(vim.fn.expand '<cword>')
+          require('dap-view').add_expr(vim.fn.expand '<cword>')
         end,
         desc = 'Add word under cursor to watches',
-        mode = { 'n', 'v' }, -- FIXED
+        mode = { 'n', 'v' },
       },
       {
         '<leader>dW',
         function()
-          require('dapui').elements.watches.add()
+          require('dap-view').add_expr()
         end,
         desc = 'Add empty watch',
         mode = 'n',
       },
-    },
-    dependencies = {
-      'jay-babu/mason-nvim-dap.nvim',
-      'leoluz/nvim-dap-go',
-      'nvim-neotest/nvim-nio',
-      'theHamsta/nvim-dap-virtual-text',
     },
   },
   {
