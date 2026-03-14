@@ -1,7 +1,11 @@
 if status is-interactive
+    
+    # Alias
+    alias speciale "zellij attach -c Speciale options --default-cwd /home/simon/Programming/MSc_cs/Speciale/"
     alias config='/usr/bin/lazygit --path ~/dotfiles/'
-    set -gx EDITOR nvim
 
+    # Variables
+    set -gx EDITOR nvim
     set -gx BACKGROUND_COLOR "#111111"
 
     set -gx JAVA_HOME "/usr/lib/jvm/java-21-openjdk-21.0.5.0.11-1.fc41.x86_64"
@@ -23,55 +27,51 @@ if status is-interactive
     bind \cP history-search-backward
     bind \cN history-search-backward
 
-    #Zellij autocomplete
-    eval (zellij setup --generate-completion fish | string collect)
+    # Zellij autocomplete
+    if not set -q ZELLIJ_AUTOCONF_DONE
+        eval (zellij setup --generate-completion fish | string collect)
+        set -g ZELLIJ_AUTOCONF_DONE 1
+    end
 
     # Gitleaks autocomplete
-    eval (gitleaks completion fish | string collect)
+    if not set -q GIT_LEAKS_AUTOCONF_DONE
+        eval (gitleaks completion fish | string collect)
+        set -g GIT_LEAKS_AUTOCONF_DONE 1
+    end
 
-  function fish_prompt
-      # Prompt status only if it's not 0
-      set -l last_status $status
-      set -l stat
-      if test $last_status -ne 0
-          set stat (set_color red)"[$last_status]"(set_color normal)
-      end
-      set -g __fish_git_prompt_show_informative_status 1
-      set -g __fish_git_prompt_showcolorhints 1
-      set -g __fish_git_prompt_color purple
-      set -g __fish_git_prompt_showupstream informative
 
-      string join '' -- (whoami) (set_color green) '@' (set_color red) (prompt_hostname) (set_color green) ":" (prompt_pwd) (set_color normal)  (fish_git_prompt)  \n $stat '> '
-  end
+    # Haskell stuff
+    set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME
+    fish_add_path -g $HOME/.cabal/bin
+    fish_add_path -g $HOME/.ghcup/bin
 
-  # Haskell stuff
-  set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME
-  fish_add_path -g $HOME/.cabal/bin
-  fish_add_path -g $HOME/.ghcup/bin
 
-  alias speciale "zellij attach -c Speciale options --default-cwd /home/simon/Programming/MSc_cs/Speciale/"
+    # pnpm
+    set -gx PNPM_HOME "/home/simon/.local/share/pnpm"
+    if not string match -q -- $PNPM_HOME $PATH
+      set -gx PATH "$PNPM_HOME" $PATH
+    end
 
+    # opencode
+    fish_add_path /home/simon/.opencode/bin
+
+    function fish_prompt
+        # Prompt status only if it's not 0
+        set -l last_status $status
+        set -l stat
+        if test $last_status -ne 0
+            set stat (set_color red)"[$last_status]"(set_color normal)
+        end
+        set -g __fish_git_prompt_show_informative_status 1
+        set -g __fish_git_prompt_showcolorhints 1
+        set -g __fish_git_prompt_color purple
+        set -g __fish_git_prompt_showupstream informative
+
+        string join '' -- (whoami) (set_color green) '@' (set_color red) (prompt_hostname) (set_color green) ":" (prompt_pwd) (set_color normal)  (fish_git_prompt)  \n $stat '> '
+    end
 end
 
 if status --is-login
 end
 
 
-# pnpm
-set -gx PNPM_HOME "/home/simon/.local/share/pnpm"
-if not string match -q -- $PNPM_HOME $PATH
-  set -gx PATH "$PNPM_HOME" $PATH
-end
-# pnpm end
-
-
-# BEGIN opam configuration
-# This is useful if you're using opam as it adds:
-#   - the correct directories to the PATH
-#   - auto-completion for the opam binary
-# This section can be safely removed at any time if needed.
-test -r '/home/simon/.opam/opam-init/init.fish' && source '/home/simon/.opam/opam-init/init.fish' > /dev/null 2> /dev/null; or true
-# END opam configuration
-
-# opencode
-fish_add_path /home/simon/.opencode/bin
