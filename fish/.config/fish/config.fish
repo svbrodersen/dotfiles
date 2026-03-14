@@ -55,20 +55,26 @@ if status is-interactive
     # opencode
     fish_add_path /home/simon/.opencode/bin
 
-    function fish_prompt
-        # Prompt status only if it's not 0
-        set -l last_status $status
-        set -l stat
-        if test $last_status -ne 0
-            set stat (set_color red)"[$last_status]"(set_color normal)
-        end
-        set -g __fish_git_prompt_show_informative_status 1
-        set -g __fish_git_prompt_showcolorhints 1
-        set -g __fish_git_prompt_color purple
-        set -g __fish_git_prompt_showupstream informative
+    # function fish_prompt
+    #     # Prompt status only if it's not 0
+    #     set -l last_status $status
+    #     set -l stat
+    #     if test $last_status -ne 0
+    #         set stat (set_color red)"[$last_status]"(set_color normal)
+    #     end
+    #     set -g __fish_git_prompt_show_informative_status 1
+    #     set -g __fish_git_prompt_showcolorhints 1
+    #     set -g __fish_git_prompt_color purple
+    #     set -g __fish_git_prompt_showupstream informative
+    #
+    #     string join '' -- (whoami) (set_color green) '@' (set_color red) (prompt_hostname) (set_color green) ":" (prompt_pwd) (set_color normal)  (fish_git_prompt)  \n $stat '> '
+    # end
 
-        string join '' -- (whoami) (set_color green) '@' (set_color red) (prompt_hostname) (set_color green) ":" (prompt_pwd) (set_color normal)  (fish_git_prompt)  \n $stat '> '
-    end
+
+  set --global tide_pwd_color_anchors "normal"
+  set --global tide_pwd_color_dirs "normal"
+  set --global tide_pwd_color_truncated_dirs "normal"
+  set --global tide_git_color_branch "white"
 end
 
 if status --is-login
