@@ -55,3 +55,4 @@ keybind = ctrl+shift+x=close_tab:this
 keybind = ctrl+shift+l=next_tab
 keybind = ctrl+shift+h=previous_tab
 mouse-hide-while-typing = true
+font-feature = -liga,-calt,-dlig
