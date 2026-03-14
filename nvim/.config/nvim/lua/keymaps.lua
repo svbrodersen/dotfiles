@@ -83,3 +83,18 @@ end, { desc = 'next diagnostic' })
 vim.keymap.set('n', '[d', function()
   vim.diagnostic.jump { count = -1 }
 end, { desc = 'previous diagnostic' })
+
+-- Yank file and line number
+vim.keymap.set('n', '<leader>yl', function()
+    local path = vim.fn.expand('%:~:.')
+    local line = vim.fn.line('.')
+    local result = path .. ':' .. line
+    vim.fn.setreg('+', result)
+end, { desc = "Yank relative path and line number" })
+vim.keymap.set('n', '<leader>yf', function()
+    local path = vim.fn.expand('%:~:.')
+    vim.fn.setreg('+', path)
+end, { desc = "Yank relative path" })
+vim.keymap.set('n', '<leader>ya', function() vim.fn.setreg('+', vim.fn.expand('%:p')) end, {desc = "Yank absolute path"})
+
+

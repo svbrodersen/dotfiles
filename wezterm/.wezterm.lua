@@ -10,8 +10,10 @@ config.color_scheme = 'Gruvbox Material (Gogh)'
 config.colors = {
 	background = "#111111",
 }
-config.font = wezterm.font 'JetBrains Mono'
-config.font_size = 12.0
+config.font = wezterm.font {
+  family = 'JetBrains Mono',
+  harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' },
+}
 config.harfbuzz_features = { "calt=0", "clig=0", "liga=0" }
 config.bold_brightens_ansi_colors = "No"
 config.enable_tab_bar = true

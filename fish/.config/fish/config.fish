@@ -49,6 +49,8 @@ if status is-interactive
   fish_add_path -g $HOME/.cabal/bin
   fish_add_path -g $HOME/.ghcup/bin
 
+  alias speciale "zellij attach -c Speciale options --default-cwd /home/simon/Programming/MSc_cs/Speciale/"
+
 end
 
 if status --is-login
@@ -61,3 +63,15 @@ if not string match -q -- $PNPM_HOME $PATH
   set -gx PATH "$PNPM_HOME" $PATH
 end
 # pnpm end
+
+
+# BEGIN opam configuration
+# This is useful if you're using opam as it adds:
+#   - the correct directories to the PATH
+#   - auto-completion for the opam binary
+# This section can be safely removed at any time if needed.
+test -r '/home/simon/.opam/opam-init/init.fish' && source '/home/simon/.opam/opam-init/init.fish' > /dev/null 2> /dev/null; or true
+# END opam configuration
+
+# opencode
+fish_add_path /home/simon/.opencode/bin
