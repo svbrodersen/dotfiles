@@ -74,7 +74,7 @@ if status is-interactive
   set --global tide_pwd_color_anchors "normal"
   set --global tide_pwd_color_dirs "normal"
   set --global tide_pwd_color_truncated_dirs "normal"
-  set --global tide_git_color_branch "white"
+  set --global tide_git_color_branch "purple"
 end
 
 if status --is-login
