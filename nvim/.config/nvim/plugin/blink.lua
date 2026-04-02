@@ -1,3 +1,15 @@
+vim.api.nvim_create_autocmd('PackChanged', {
+  callback = function(ev)
+    local name, kind = ev.data.spec.name, ev.data.kind
+    if name == 'blink-cmp' and kind == 'update' then
+      if not ev.data.active then
+        vim.cmd.packadd 'blink-cmp'
+      end
+      vim.cmd 'BlinkCmp build'
+    end
+  end,
+})
+
 vim.pack.add {
   'https://github.com/https://github.com/saghen/blink.cmp',
 }

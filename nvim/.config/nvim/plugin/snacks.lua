@@ -34,7 +34,7 @@ end, {desc = 'Grep'})
 
 vim.keymap.set("n", '<leader>:', function ()
   Snacks.picker.command_history()
-end, {desc = 'Grep'})
+end, {desc = 'Command History'})
 
 -- Search
 
