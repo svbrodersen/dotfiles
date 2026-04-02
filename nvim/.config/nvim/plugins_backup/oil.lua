@@ -5,7 +5,7 @@ return {
   dependencies = { { 'nvim-mini/mini.icons', opts = {} } },
   lazy = false,
   config = function(_, opts)
-    require('oil').setup(opts)
+    require('plugins_backup.oil').setup(opts)
 
     vim.keymap.set('n', '<leader>e', function()
       if vim.t.is_codediff then

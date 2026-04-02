@@ -1,22 +1,8 @@
--- NOTE: Plugins can also be configured to run Lua code when they are loaded.
---
--- This is often very useful to both group configuration, as well as handle
--- lazy loading plugins that don't need to be loaded immediately at startup.
---
--- For example, in the following configuration, we use:
---  event = 'VimEnter'
---
--- which loads which-key before all the UI elements are loaded. Events can be
--- normal autocommands events (`:help autocmd-events`).
---
--- Then, because we use the `opts` key (recommended), the configuration runs
--- after the plugin has been loaded as `require(MODULE).setup(opts)`.
+vim.pack.add({
+    'https://github.com/folke/which-key.nvim',
+})
 
-return {
-  { -- Useful plugin to show you pending keybinds.
-    'folke/which-key.nvim',
-    event = 'VimEnter', -- Sets the loading event to 'VimEnter'
-    opts = {
+require('which-key').setup({
       -- delay between pressing a key and opening which-key (milliseconds)
       -- this setting is independent of vim.o.timeoutlen
       delay = 0,
@@ -59,13 +45,9 @@ return {
 
       -- Document existing key chains
       spec = {
-        { '<leader>s', group = '[S]earch' },
-        { '<leader>g', group = '[G]it', mode = { 'n', 'v' } },
-        { '<leader>u', group = '[U]i', mode = { 'n', 'v' } },
-        { '<leader>f', group = '[F]ind', mode = { 'n', 'v' } },
-        { '<leader>c', group = '[C]ode', mode = { 'n', 'v' } },
+        { '<leader>s', group = 'Search' },
+        { '<leader>g', group = 'Git', mode = { 'n', 'v' } },
+        { '<leader>u', group = 'Ui', mode = { 'n', 'v' } },
+        { '<leader>c', group = 'Code', mode = { 'n', 'v' } },
       },
-    },
-  },
-}
--- vim: ts=2 sts=2 sw=2 et
+})

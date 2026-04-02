@@ -18,7 +18,6 @@ return {
   },
   {
     'olimorris/codecompanion.nvim',
-    opts = {},
     dependencies = {
       'nvim-lua/plenary.nvim',
       'nvim-treesitter/nvim-treesitter',
@@ -31,7 +30,13 @@ return {
       { '<leader>af', "<cmd>'<,'>CodeCompanion /fix<cr>", mode = 'v', desc = 'Ai [F]ix' },
       { '<leader>ap', "<cmd>'<,'>CodeCompanion /lsp<cr>", mode = 'v', desc = 'Ai [l]sp explain' },
     },
-    opts = {},
+    opts = {
+      interactions = {
+        chat = {
+          adapter = "opencode",
+        },
+      },
+    },
   },
   {
     'MeanderingProgrammer/render-markdown.nvim',
