@@ -4,6 +4,8 @@ local wezterm = require("wezterm")
 -- This will hold the configuration.
 local config = wezterm.config_builder()
 
+config.font = wezterm.font("JetBrains Mono")
+
 config.color_scheme = 'Gruvbox Material (Gogh)'
 config.colors = {
 	background = "#111111",
