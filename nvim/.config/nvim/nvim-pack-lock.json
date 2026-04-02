@@ -10,7 +10,7 @@
     },
     "codecompanion.nvim": {
       "rev": "e0fe366cf3af6c80dcac86cb053ef3fe48aae911",
-      "src": "https://github.com/olimorris/codecompanion.nvim"
+      "src": "https://www.github.com/olimorris/codecompanion.nvim"
     },
     "codediff.nvim": {
       "rev": "832f1ecc5f8b15a44cf7537e31d3266d657775b1",
@@ -63,10 +63,6 @@
     "mini.nvim": {
       "rev": "3923662bf3d6ca49a9503f8d7196ea0450983e6a",
       "src": "https://github.com/echasnovski/mini.nvim"
-    },
-    "nvim-autopairs": {
-      "rev": "59bce2eef357189c3305e25bc6dd2d138c1683f5",
-      "src": "https://github.com/windwp/nvim-autopairs"
     },
     "nvim-dap": {
       "rev": "4f5deb110d9ff8994d96c21df95e2271d11214f9",
