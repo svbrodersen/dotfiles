@@ -70,11 +70,10 @@ if status is-interactive
     #     string join '' -- (whoami) (set_color green) '@' (set_color red) (prompt_hostname) (set_color green) ":" (prompt_pwd) (set_color normal)  (fish_git_prompt)  \n $stat '> '
     # end
 
-
-  set --global tide_pwd_color_anchors "normal"
-  set --global tide_pwd_color_dirs "normal"
-  set --global tide_pwd_color_truncated_dirs "normal"
-  set --global tide_git_color_branch "purple"
+    set --global tide_pwd_color_anchors "normal"
+    set --global tide_pwd_color_dirs "normal"
+    set --global tide_pwd_color_truncated_dirs "normal"
+    set --global tide_git_color_branch "purple"
 end
 
 if status --is-login
