@@ -46,7 +46,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end, 'Goto Implementation')
     map('gy', function()
       Snacks.picker.lsp_type_definitions()
-    end, 'Goto T[y]pe Definition')
+    end, 'Goto Type Definition')
     map('<leader>ss', function()
       Snacks.picker.lsp_symbols()
     end, 'LSP Symbols')
@@ -146,6 +146,7 @@ local servers = {
   tailwindcss = {
     filetypes_exclude = { 'markdown' },
   },
+  texlab = {},
   emmet_language_server = {},
   markdownlint = {},
   -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs

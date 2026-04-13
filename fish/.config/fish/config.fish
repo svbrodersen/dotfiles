@@ -1,7 +1,7 @@
 if status is-interactive
     
     # Alias
-    alias speciale "zellij attach -c Speciale options --default-cwd /home/simon/Programming/MSc_cs/Speciale/"
+    alias speciale='tmux new-session -A -s Speciale -c /home/simon/Programming/MSc_cs/Speciale/'
     alias config='/usr/bin/lazygit --path ~/dotfiles/'
 
     # Variables
