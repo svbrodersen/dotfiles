@@ -1,17 +1,17 @@
 vim.pack.add {
   'https://github.com/mfussenegger/nvim-dap',
   'https://github.com/theHamsta/nvim-dap-virtual-text',
-  'https://github.com/igorlfs/nvim-dap-view',
+  'https://github.com/igorlfs/nvim-dap-view.git',
   'https://github.com/leoluz/nvim-dap-go',
-  'https://github.com/nvimtools/hydra.nvim',
+"https://github.com/nvim-neotest/neotest.git",
   'https://github.com/mason-org/mason.nvim',
   'https://github.com/jay-babu/mason-nvim-dap.nvim',
 }
 
-require("mason").setup()
+require('mason').setup()
 
 local dap = require 'dap'
-local Hydra = require 'hydra'
+local dapview = require("dap-view")
 
 local dap = require 'dap'
 -- Setup mason-nvim-dap first
@@ -32,7 +32,6 @@ require('dap-go').setup {
 }
 
 -- Configure C/C++/Rust debugging
--- FIXED: This should be an array of configurations
 dap.configurations.cpp = {
   {
     name = 'Launch file',
@@ -47,9 +46,6 @@ dap.configurations.cpp = {
 }
 dap.configurations.c = dap.configurations.cpp
 dap.configurations.rust = dap.configurations.cpp
-
-local dap = require 'dap'
-require('dap-view').setup(opts)
 
 -- Change breakpoint icons
 vim.api.nvim_set_hl(0, 'DapBreak', { fg = '#e51400' })
@@ -71,7 +67,8 @@ dap.listeners.after['event_initialized']['me'] = function()
     local keymaps = api.nvim_buf_get_keymap(buf, 'n')
     for _, keymap in pairs(keymaps) do
       if keymap.lhs == 'K' then
-        table.insert(keymap_restore, keymap)
+        -- Wrap the keymap and the buffer ID in a table
+        table.insert(keymap_restore, { buf = buf, map = keymap })
         api.nvim_buf_del_keymap(buf, 'n', 'K')
       end
     end
@@ -79,134 +76,74 @@ dap.listeners.after['event_initialized']['me'] = function()
   api.nvim_set_keymap('n', 'K', '<Cmd>lua require("dap.ui.widgets").hover()<CR>', { silent = true })
 end
 
--- Define the Hydra used while debugging
-local dap_hydra = Hydra {
-  name = 'DAP Controls',
-  mode = 'n',
-  body = '<leader>dd', -- Manual trigger if you want it
-  desc = 'hydra mapping',
-  config = {
-    color = 'pink',
-    invoke_on_body = true,
-    hint = {
-      type = 'window',
-      position = 'bottom',
-    },
-  },
-  heads = {
-    { 'n', dap.step_over, { silent = true } },
-    { 'i', dap.step_into, { silent = true } },
-    { 'o', dap.step_out, { silent = true } },
-    { 'u', dap.up, { silent = true } },
-    { 'd', dap.down, { silent = true } },
-    { 'c', dap.continue, { silent = true } },
-    { 'r', dap.run_to_cursor, { silent = true } },
-    { 't', dap.toggle_breakpoint, { silent = true } },
-    { 'x', dap.terminate, { exit = true, silent = true } },
-    { 'q', nil, { exit = true } },
-  },
-}
-
--- Automatically enter debug-hydra when DAP starts
-dap.listeners.after.event_initialized['dap_hydra'] = function()
-  dap_hydra:activate()
+dap.listeners.after.event_initialized["dap_view"] = function()
+  dapview.open()
 end
 
--- Exit hydra when debugging terminates/exits
-dap.listeners.before.event_terminated['dap_hydra'] = function()
-  dap_hydra:exit()
+-- close UI when session ends (normal termination)
+dap.listeners.after.event_terminated["dap_view"] = function()
+  dapview.close()
 end
 
-dap.listeners.before.event_exited['dap_hydra'] = function()
-  dap_hydra:exit()
+-- also close on exit (important for force stop / error cases)
+dap.listeners.after.event_exited["dap_view"] = function()
+  dapview.close()
 end
 
--- Resize
+dap.listeners.after['event_terminated']['me'] = function()
+  -- Remove the global DAP 'K' mapping
+  pcall(api.nvim_del_keymap, 'n', 'K')
+  -- Restore the original 'K' mappings
+  for _, restore in ipairs(keymap_restore) do
+    pcall(api.nvim_buf_set_keymap, restore.buf, restore.map.mode, restore.map.lhs, restore.map.rhs, {
+      silent = restore.map.silent == 1,
+      noremap = restore.map.noremap == 1,
+      desc = restore.map.desc,
+    })
+  end
+  keymap_restore = {}
+end
 
-Hydra {
-  name = 'Resize Window',
-  mode = 'n', -- normal mode
-  body = 'g<C-w>', -- activate hydra after pressing Ctrl-w
-  heads = {
-    { 'h', '2<C-w><', { desc = 'Resize Left' } },
-    { 'l', '2<C-w>>', { desc = 'Resize Right' } },
-    { 'j', '2<C-w>+', { desc = 'Resize Down' } },
-    { 'k', '2<C-w>-', { desc = 'Resize Up' } },
-    { '<Esc>', nil, { exit = true, desc = 'Exit Hydra' } },
-  },
-  config = {
-    invoke_on_body = true, -- allow activating hydra on body press
-    hint = {
-      type = 'window',
-      position = 'bottom',
+-- nvim-dap-view
+require('dap-view').setup {
+  winbar = {
+    show_keymap_hints = true,
+    controls = {
+      enabled = true,
     },
   },
 }
 
 -- Keymaps
+vim.keymap.set('n', '<F1>', function()
+  require('dap').continue()
+end, { desc = 'Continue' })
+vim.keymap.set('n', '<F2>', function()
+  require('dap').step_over()
+end, { desc = 'Step Over' })
+vim.keymap.set('n', '<F3>', function()
+  require('dap').step_into()
+end, { desc = 'Step Into' })
+vim.keymap.set('n', '<F4>', function()
+  require('dap').step_back()
+end, { desc = 'Step Back' })
+vim.keymap.set('n', '<F5>', function()
+  require('dap').step_out()
+end, { desc = 'Step Out' })
+vim.keymap.set('n', '<F6>', function()
+  require('dap').run_to_cursor()
+end, { desc = 'Run to cursor' })
 
-vim.keymap.set (
-  "n",
-  "<leader>dt",
-  function()
-    require('dap').toggle_breakpoint()
-  end,
-  { desc = 'Toggle breakpoint' }
-)
+vim.keymap.set('n', '<leader>dt', function()
+  require('dap').toggle_breakpoint()
+end, { desc = 'Toggle breakpoint' })
 
-
-vim.keymap.set (
-  'n',
-  '<leader>dc',
-  function()
-    require('dap').continue()
-  end,
-  { desc = 'Continue' }
-)
-
-vim.keymap.set(
-
-  'n',
-  '<leader>di',
-  function()
-    require('dap').step_into()
-  end,
-  { desc = 'Step Into' }
-) 
-
-vim.keymap.set (
-  'n',
-  '<leader>do',
-  function()
-    require('dap').step_over()
-  end,
-  { desc = 'Step Over' }
-)
-
-vim.keymap.set (
-  'n',
-  '<leader>dO',
-  function()
-    require('dap').step_out()
-  end,
-  { desc = 'Step Out' }
-)
-
-vim.keymap.set (
-  'n',
-  '<leader>db',
-  function()
-    require('dap').step_back()
-  end,
-  { desc = 'Step Back' }
-)
-
-vim.keymap.set (
-  'n',
-  '<leader>dr',
-  function()
-    require('dap').restart()
-  end,
-  { desc = 'Restart' }
-)
-
+vim.keymap.set('n', '<F10>', function()
+  require('dap').toggle_breakpoint()
+end, { desc = 'Toggle breakpoint' })
+vim.keymap.set('n', '<F11>', function()
+  require('dap').restart()
+end, { desc = 'Restart' })
+vim.keymap.set('n', '<F12>', function()
+  require('dap').terminate()
+end, { desc = 'Restart' })

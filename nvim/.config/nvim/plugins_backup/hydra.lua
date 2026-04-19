@@ -45,26 +45,5 @@ return {
     dap.listeners.before.event_exited['dap_hydra'] = function()
       dap_hydra:exit()
     end
-
-    -- Resize
-    Hydra {
-      name = 'Resize Window',
-      mode = 'n', -- normal mode
-      body = 'g<C-w>', -- activate hydra after pressing Ctrl-w
-      heads = {
-        { 'h', '2<C-w><', { desc = 'Resize Left' } },
-        { 'l', '2<C-w>>', { desc = 'Resize Right' } },
-        { 'j', '2<C-w>+', { desc = 'Resize Down' } },
-        { 'k', '2<C-w>-', { desc = 'Resize Up' } },
-        { '<Esc>', nil, { exit = true, desc = 'Exit Hydra' } },
-      },
-      config = {
-        invoke_on_body = true, -- allow activating hydra on body press
-        hint = {
-          type = 'window',
-          position = 'bottom',
-        },
-      },
-    }
   end,
 }

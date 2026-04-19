@@ -25,17 +25,10 @@ vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' }
 -- Keybinds to make split navigation easier.
 --  Use CTRL+<hjkl> to switch between windows
 --
---  See `:help wincmd` for a list of all window commands
-vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
-vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
-vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
-vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
-
--- NOTE: Some terminals have colliding keymaps or are not able to send distinct keycodes
--- vim.keymap.set("n", "<C-S-h>", "<C-w>H", { desc = "Move window to the left" })
--- vim.keymap.set("n", "<C-S-l>", "<C-w>L", { desc = "Move window to the right" })
--- vim.keymap.set("n", "<C-S-j>", "<C-w>J", { desc = "Move window to the lower" })
--- vim.keymap.set("n", "<C-S-k>", "<C-w>K", { desc = "Move window to the upper" })
+vim.keymap.set("n", "<C-S-h>", "<C-w>H", { desc = "Move window to the left" })
+vim.keymap.set("n", "<C-S-l>", "<C-w>L", { desc = "Move window to the right" })
+vim.keymap.set("n", "<C-S-j>", "<C-w>J", { desc = "Move window to the lower" })
+vim.keymap.set("n", "<C-S-k>", "<C-w>K", { desc = "Move window to the upper" })
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
@@ -102,3 +95,33 @@ end, { desc = 'Yank absolute path' })
 vim.keymap.set('n', '<leader>U', function()
   vim.pack.update()
 end, { desc = 'Update' })
+
+-- Resize
+local function resize_left(amount)
+  vim.cmd("wincmd h")
+  vim.cmd("vertical resize -" .. amount)
+  vim.cmd("wincmd l")
+end
+
+local function resize_right(amount)
+  vim.cmd("wincmd h")
+  vim.cmd("vertical resize +" .. amount)
+  vim.cmd("wincmd l")
+end
+
+local function resize_down(amount)
+  vim.cmd("wincmd k")
+  vim.cmd("resize +" .. amount)
+  vim.cmd("wincmd j")
+end
+
+local function resize_up(amount)
+  vim.cmd("wincmd k")
+  vim.cmd("resize -" .. amount)
+  vim.cmd("wincmd j")
+end
+
+vim.keymap.set('n', '<A-h>', function() resize_left(5) end)
+vim.keymap.set('n', '<A-l>', function() resize_right(5) end)
+vim.keymap.set('n', '<A-j>', function() resize_down(5) end)
+vim.keymap.set('n', '<A-k>', function() resize_up(5) end)
