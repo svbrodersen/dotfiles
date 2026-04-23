@@ -11,6 +11,7 @@ vim.api.nvim_create_autocmd('PackChanged', {
 })
 
 vim.pack.add {
+  'https://github.com/saghen/blink.lib',
   'https://github.com/saghen/blink.cmp',
 }
 
