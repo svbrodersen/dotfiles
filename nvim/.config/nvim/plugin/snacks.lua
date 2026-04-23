@@ -46,7 +46,7 @@ vim.keymap.set("n", '<leader>sb', function ()
   Snacks.picker.grep_buffers()
 end, {desc = 'Grep Buffers'})
 
-vim.keymap.set("n", '<leader>sw', function ()
+vim.keymap.set({"n", "v"}, '<leader>sw', function ()
   Snacks.picker.grep_word()
 end, {desc = 'Grep Word'})
 

@@ -6,6 +6,6 @@ vim.keymap.set('n', '<leader>sr', '<cmd>lua require("spectre").toggle()<CR>', {
     desc = "Toggle Replace"
 })
 
-vim.keymap.set('v', '<leader>sw', '<esc><cmd>lua require("spectre").open_visual()<CR>', {
+vim.keymap.set('v', '<leader>sr', '<esc><cmd>lua require("spectre").open_visual()<CR>', {
     desc = "Replace Word"
 })
