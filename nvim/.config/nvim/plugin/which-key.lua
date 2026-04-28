@@ -46,7 +46,7 @@ require('which-key').setup({
       -- Document existing key chains
       spec = {
         { '<leader>s', group = 'Search' },
-        { '<leader>r', group = 'Restore' },
+        { '<leader>S', group = 'Session' },
         { '<leader>a', group = 'Ai' },
         { '<leader>d', group = 'Debug' },
         { '<leader>g', group = 'Git', mode = { 'n', 'v' } },

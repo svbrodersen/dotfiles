@@ -15,7 +15,7 @@ require('mini.statusline').setup {
 
 vim.keymap.set (
   "n",
-  "<leader>rs",
+  "<leader>Ss",
   function ()
     require("mini.sessions").select()
   end,
@@ -24,7 +24,7 @@ vim.keymap.set (
 
 vim.keymap.set (
   "n",
-  "<leader>rd",
+  "<leader>Sd",
   function ()
     require("mini.sessions").select("delete")
   end,
@@ -33,7 +33,7 @@ vim.keymap.set (
 
 vim.keymap.set (
   "n",
-  "<leader>rw",
+  "<leader>Sw",
   function ()
     require("mini.sessions").write()
   end,
@@ -42,7 +42,7 @@ vim.keymap.set (
 
 vim.keymap.set (
   "n",
-  "<leader>rc",
+  "<leader>Sc",
   function ()
     local input = vim.fn.input("Name: ")
     require("mini.sessions").write(input)
@@ -52,7 +52,7 @@ vim.keymap.set (
 
 vim.keymap.set (
   "n",
-  "<leader>rl",
+  "<leader>Sl",
   function ()
     require("mini.sessions").read()
   end,
