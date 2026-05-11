@@ -1,21 +1,9 @@
-vim.api.nvim_create_autocmd('PackChanged', {
-  callback = function(ev)
-    local name, kind = ev.data.spec.name, ev.data.kind
-    if name == 'blink-cmp' and kind == 'update' then
-      if not ev.data.active then
-        vim.cmd.packadd 'blink-cmp'
-      end
-      vim.cmd 'BlinkCmp build'
-    end
-  end,
-})
+vim.pack.add({ 'saghen/blink.lib', 'saghen/blink.cmp' })
+local cmp = require('blink.cmp')
+cmp.build():wait(60000)
+cmp.setup()
 
-vim.pack.add {
-  'https://github.com/saghen/blink.lib',
-  'https://github.com/saghen/blink.cmp',
-}
-
-require('blink-cmp').setup {
+cmp.setup {
   keymap = {
     -- 'default' (recommended) for mappings similar to built-in completions
     --   <c-y> to accept ([y]es) the completion.

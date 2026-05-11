@@ -6,7 +6,7 @@ local iron = require 'iron.core'
 local view = require 'iron.view'
 local common = require 'iron.fts.common'
 
-local conda_python = os.getenv 'CONDA_PREFIX' .. '/bin/python'
+local conda_python = (os.getenv('CONDA_PREFIX') or '/usr') .. '/bin/python'
 
 require('iron').setup {
   config = {
