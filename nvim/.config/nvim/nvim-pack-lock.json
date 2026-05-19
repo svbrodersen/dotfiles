@@ -6,11 +6,11 @@
     },
     "blink.cmp": {
       "rev": "d3874d2a13aa19b095bdd10d37a82a8f0aa7cad3",
-      "src": "https://github.com/saghen/blink.cmp"
+      "src": "saghen/blink.cmp"
     },
     "blink.lib": {
       "rev": "f29d8bac6549bc1e7d699c83f680823d7def98bd",
-      "src": "https://github.com/saghen/blink.lib"
+      "src": "saghen/blink.lib"
     },
     "codecompanion.nvim": {
       "rev": "f85078a8e0a44159c8653ef507511a38fb9b2a6d",

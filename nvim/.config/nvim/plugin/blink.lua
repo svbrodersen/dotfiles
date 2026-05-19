@@ -1,4 +1,4 @@
-vim.pack.add({ 'https://github.com/saghen/blink.lib.git', 'https://github.com/saghen/blink.cmp.git' })
+vim.pack.add({ 'https://github.com/saghen/blink.lib', 'https://github.com/saghen/blink.cmp.git' })
 local cmp = require('blink.cmp')
 cmp.build():wait(60000)
 cmp.setup()
