@@ -142,13 +142,12 @@ require('dap-view').setup {
 vim.keymap.set('n', '<F1>', dap.continue, { desc = 'Continue' })
 vim.keymap.set('n', '<F2>', dap.step_over, { desc = 'Step Over' })
 vim.keymap.set('n', '<F3>', dap.step_into, { desc = 'Step Into' })
-vim.keymap.set('n', '<F4>', dap.step_back, { desc = 'Step Back' })
-vim.keymap.set('n', '<F5>', dap.step_out, { desc = 'Step Out' })
-vim.keymap.set('n', '<F6>', dap.run_to_cursor, { desc = 'Run to cursor' })
+vim.keymap.set('n', '<F4>', dap.step_out, { desc = 'Step Out' })
+vim.keymap.set('n', '<F5>', dap.run_to_cursor, { desc = 'Run to cursor' })
+vim.keymap.set('n', '<F6>', dap.step_back, { desc = 'Step Back' })
+vim.keymap.set('n', '<F7>', dap.restart, { desc = 'Restart' })
+vim.keymap.set('n', '<F8>', dap.terminate, { desc = 'Terminate' })
 vim.keymap.set('n', '<leader>dt', dap.toggle_breakpoint, { desc = 'Toggle breakpoint' })
-vim.keymap.set('n', '<F10>', dap.toggle_breakpoint, { desc = 'Toggle breakpoint' })
-vim.keymap.set('n', '<F11>', dap.restart, { desc = 'Restart' })
-vim.keymap.set('n', '<F12>', dap.terminate, { desc = 'Terminate' })
 
 -- Neotest
 require('neotest').setup {
