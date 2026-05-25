@@ -3,17 +3,20 @@ vim.pack.add {
   'https://github.com/theHamsta/nvim-dap-virtual-text',
   'https://github.com/igorlfs/nvim-dap-view.git',
   'https://github.com/leoluz/nvim-dap-go',
-"https://github.com/nvim-neotest/neotest.git",
   'https://github.com/mason-org/mason.nvim',
   'https://github.com/jay-babu/mason-nvim-dap.nvim',
+
+  'https://github.com/nvim-neotest/nvim-nio.git',
+  'https://github.com/nvim-neotest/neotest.git',
+  'https://github.com/fredrikaverpil/neotest-golang',
+  'https://github.com/rouge8/neotest-rust',
 }
 
 require('mason').setup()
 
 local dap = require 'dap'
-local dapview = require("dap-view")
+local dapview = require 'dap-view'
 
-local dap = require 'dap'
 -- Setup mason-nvim-dap first
 require('mason-nvim-dap').setup {
   automatic_installation = true,
@@ -21,6 +24,31 @@ require('mason-nvim-dap').setup {
   ensure_installed = {
     'delve',
     'codelldb',
+  },
+}
+
+local mason_bin = vim.fn.stdpath 'data' .. '/mason/'
+local codelldb_path = mason_bin .. 'bin/codelldb'
+local liblldb_path = mason_bin .. 'packages/codelldb/extension/lldb/lib/liblldb'
+local os_name = io.popen('uname'):read '*l'
+
+if os_name == 'Darwin' then
+  liblldb_path = liblldb_path .. '.dylib'
+elseif os_name == 'Linux' then
+  liblldb_path = liblldb_path .. '.so'
+else -- Windows setup
+  codelldb_path = mason_bin .. 'packages\\codelldb\\extension\\adapter\\codelldb.exe'
+  liblldb_path = mason_bin .. 'packages\\codelldb\\extension\\lldb\\bin\\liblldb.dll'
+end
+
+-- Define the codelldb adapter for nvim-dap
+-- The --liblldb argument is critical; without it, Rust types (Strings, Vecs) won't format properly.
+dap.adapters.codelldb = {
+  type = 'server',
+  port = '${port}',
+  executable = {
+    command = codelldb_path,
+    args = { '--port', '${port}', '--liblldb', liblldb_path },
   },
 }
 
@@ -38,7 +66,8 @@ dap.configurations.cpp = {
     type = 'codelldb',
     request = 'launch',
     program = function()
-      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+      -- Targets standard Rust target folder location alongside fallback
+      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/target/debug/', 'file')
     end,
     cwd = '${workspaceFolder}',
     stopOnEntry = false,
@@ -67,7 +96,6 @@ dap.listeners.after['event_initialized']['me'] = function()
     local keymaps = api.nvim_buf_get_keymap(buf, 'n')
     for _, keymap in pairs(keymaps) do
       if keymap.lhs == 'K' then
-        -- Wrap the keymap and the buffer ID in a table
         table.insert(keymap_restore, { buf = buf, map = keymap })
         api.nvim_buf_del_keymap(buf, 'n', 'K')
       end
@@ -76,24 +104,20 @@ dap.listeners.after['event_initialized']['me'] = function()
   api.nvim_set_keymap('n', 'K', '<Cmd>lua require("dap.ui.widgets").hover()<CR>', { silent = true })
 end
 
-dap.listeners.after.event_initialized["dap_view"] = function()
+dap.listeners.after.event_initialized['dap_view'] = function()
   dapview.open()
 end
 
--- close UI when session ends (normal termination)
-dap.listeners.after.event_terminated["dap_view"] = function()
+dap.listeners.after.event_terminated['dap_view'] = function()
   dapview.close()
 end
 
--- also close on exit (important for force stop / error cases)
-dap.listeners.after.event_exited["dap_view"] = function()
+dap.listeners.after.event_exited['dap_view'] = function()
   dapview.close()
 end
 
 dap.listeners.after['event_terminated']['me'] = function()
-  -- Remove the global DAP 'K' mapping
   pcall(api.nvim_del_keymap, 'n', 'K')
-  -- Restore the original 'K' mappings
   for _, restore in ipairs(keymap_restore) do
     pcall(api.nvim_buf_set_keymap, restore.buf, restore.map.mode, restore.map.lhs, restore.map.rhs, {
       silent = restore.map.silent == 1,
@@ -115,35 +139,32 @@ require('dap-view').setup {
 }
 
 -- Keymaps
-vim.keymap.set('n', '<F1>', function()
-  require('dap').continue()
-end, { desc = 'Continue' })
-vim.keymap.set('n', '<F2>', function()
-  require('dap').step_over()
-end, { desc = 'Step Over' })
-vim.keymap.set('n', '<F3>', function()
-  require('dap').step_into()
-end, { desc = 'Step Into' })
-vim.keymap.set('n', '<F4>', function()
-  require('dap').step_back()
-end, { desc = 'Step Back' })
-vim.keymap.set('n', '<F5>', function()
-  require('dap').step_out()
-end, { desc = 'Step Out' })
-vim.keymap.set('n', '<F6>', function()
-  require('dap').run_to_cursor()
-end, { desc = 'Run to cursor' })
+vim.keymap.set('n', '<F1>', dap.continue, { desc = 'Continue' })
+vim.keymap.set('n', '<F2>', dap.step_over, { desc = 'Step Over' })
+vim.keymap.set('n', '<F3>', dap.step_into, { desc = 'Step Into' })
+vim.keymap.set('n', '<F4>', dap.step_back, { desc = 'Step Back' })
+vim.keymap.set('n', '<F5>', dap.step_out, { desc = 'Step Out' })
+vim.keymap.set('n', '<F6>', dap.run_to_cursor, { desc = 'Run to cursor' })
+vim.keymap.set('n', '<leader>dt', dap.toggle_breakpoint, { desc = 'Toggle breakpoint' })
+vim.keymap.set('n', '<F10>', dap.toggle_breakpoint, { desc = 'Toggle breakpoint' })
+vim.keymap.set('n', '<F11>', dap.restart, { desc = 'Restart' })
+vim.keymap.set('n', '<F12>', dap.terminate, { desc = 'Terminate' })
 
-vim.keymap.set('n', '<leader>dt', function()
-  require('dap').toggle_breakpoint()
-end, { desc = 'Toggle breakpoint' })
+-- Neotest
+require('neotest').setup {
+  adapters = {
+    require 'neotest-rust' {
+      args = { '--no-capture' },
+    },
 
-vim.keymap.set('n', '<F10>', function()
-  require('dap').toggle_breakpoint()
-end, { desc = 'Toggle breakpoint' })
-vim.keymap.set('n', '<F11>', function()
-  require('dap').restart()
-end, { desc = 'Restart' })
-vim.keymap.set('n', '<F12>', function()
-  require('dap').terminate()
-end, { desc = 'Restart' })
+    require 'neotest-golang' {
+      go_test_args = { '-v', '-race', '-count=1', '-timeout=60s' },
+      dap_go_enabled = true, -- Smoothly hooks into your existing delve configurations
+    },
+  },
+}
+
+-- Map a shortcut to debug the nearest test contextually
+vim.keymap.set('n', '<leader>td', function()
+  require('neotest').run.run { strategy = 'dap' }
+end, { desc = 'Debug Nearest Test' })
