@@ -1,7 +1,7 @@
 vim.pack.add {
   'https://github.com/folke/lazydev.nvim',
   'https://github.com/neovim/nvim-lspconfig',
-  'https://github.com/mason-org/mason-lspconfig.nvim',
+  'https://github.com/mason-org/mason-lspconfig.nvim.git',
   'https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim',
   'https://github.com/j-hui/fidget.nvim',
   'https://github.com/saghen/blink.cmp',
@@ -38,10 +38,12 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end
 
     -- Keymaps
-    local Snacks = require('snacks')
+    local Snacks = require 'snacks'
     map('<leader>cr', vim.lsp.buf.rename, 'Rename')
     map('<leader>ca', vim.lsp.buf.code_action, 'Code Action', { 'n', 'x' })
-    map('<leader>cd', function() vim.diagnostic.open_float(nil, { scope = 'line', focus = false }) end, 'Code Diagnostics', { 'n', 'x' })
+    map('<leader>cd', function()
+      vim.diagnostic.open_float(nil, { scope = 'line', focus = false })
+    end, 'Code Diagnostics', { 'n', 'x' })
     map('gd', Snacks.picker.lsp_definitions, 'Goto Definition')
     map('gD', Snacks.picker.lsp_declarations, 'Goto Declaration')
     map('gr', Snacks.picker.lsp_references, 'References')
@@ -54,7 +56,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     local client = vim.lsp.get_client_by_id(event.data.client_id)
     if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight, event.buf) then
       local highlight_augroup = vim.api.nvim_create_augroup('lsp-highlight', { clear = false })
-      
+
       vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
         buffer = event.buf,
         group = highlight_augroup,
@@ -71,7 +73,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('lsp-detach', { clear = true }),
         callback = function(event2)
           vim.lsp.buf.clear_references()
-          vim.api.nvim_clear_autocmds { group = 'kickstart-lsp-highlight', buffer = event2.buf }
+          vim.api.nvim_clear_autocmds { group = 'lsp-highlight', buffer = event2.buf }
         end,
       })
     end
@@ -96,7 +98,7 @@ local servers = {
       end
     end,
   },
-  
+
   -- Put rust_analyzer back here
   rust_analyzer = {
     -- Note: standard lspconfig expects settings under the 'settings' key,
@@ -109,19 +111,71 @@ local servers = {
           buildScripts = { enable = true },
         },
         check = {
-          command = "clippy",
-          extraArgs = { "--", "-W", "clippy::all", "-W", "clippy::pedantic" }
+          command = 'clippy',
+          extraArgs = { '--', '-W', 'clippy::all', '-W', 'clippy::pedantic' },
         },
         checkOnSave = true,
         diagnostics = { enable = true },
         procMacro = { enable = true },
         files = {
           exclude = {
-            '.direnv', '.git', '.jj', '.github', '.gitlab', 'bin',
-            'node_modules', 'target', 'venv', '.venv',
+            '.direnv',
+            '.git',
+            '.jj',
+            '.github',
+            '.gitlab',
+            'bin',
+            'node_modules',
+            'target',
+            'venv',
+            '.venv',
           },
           watcher = 'client',
         },
+      },
+    },
+  },
+  gopls = { gofumpt = true },
+  pyright = {},
+  neocmake = {},
+  jdtls = {},
+  texlab = {},
+  html = {
+    filetypes = {
+      'html',
+      'rust',
+    },
+    init_options = {
+      userLanguages = {
+        eelixir = 'html-eex',
+        eruby = 'erb',
+        rust = 'html',
+      },
+    },
+  },
+  emmet_language_server = {
+    filetypes = {
+      'html',
+      'rust',
+    },
+    init_options = {
+      userLanguages = {
+        eelixir = 'html-eex',
+        eruby = 'erb',
+        rust = 'html',
+      },
+    },
+  },
+  tailwindcss = {
+    filetypes = {
+      'html',
+      'rust',
+    },
+    init_options = {
+      userLanguages = {
+        eelixir = 'html-eex',
+        eruby = 'erb',
+        rust = 'html',
       },
     },
   },
@@ -132,31 +186,21 @@ local servers = {
       },
     },
   },
-  gopls = { gofumpt = true },
-  pyright = {},
-  neocmake = {},
-  jdtls = {},
-  texlab = {},
-  emmet_language_server = {},
-  markdownlint = {},
 }
 
-local ensure_installed = vim.tbl_keys(servers)
-vim.list_extend(ensure_installed, { 'stylua' })
+local all_tools = vim.tbl_keys(servers)
+vim.list_extend(all_tools, { 'stylua', 'markdownlint' })
 
-require('mason-tool-installer').setup { ensure_installed = ensure_installed }
+require('mason-tool-installer').setup { ensure_installed = all_tools }
 
-require('mason-lspconfig').setup {
-  ensure_installed = {},
-  automatic_installation = false,
-  handlers = {
-    function(server_name)
-      local server = servers[server_name] or {}
-      server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-      require('lspconfig')[server_name].setup(server)
-    end,
-  },
-}
+for server_name, server_config in pairs(servers) do
+  server_config.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server_config.capabilities or {})
+
+  vim.lsp.config(server_name, server_config)
+  vim.lsp.enable(server_name)
+end
 
 -- Neovim 0.11 native LSP initialization for specific servers
-vim.lsp.enable('futhark_lsp')
+if vim.fn.executable 'futhark-lsp' == 1 then
+  vim.lsp.enable 'futhark_lsp'
+end
