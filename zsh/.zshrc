@@ -1,6 +1,13 @@
 export ZSH="$HOME/.oh-my-zsh"
-source $ZSH/oh-my-zsh.sh
 ZSH_THEME=""
+
+plugins=(
+  git
+  zsh-autosuggestions
+  zsh-syntax-highlighting
+)
+
+source $ZSH/oh-my-zsh.sh
 
 export EDITOR=nvim
 export BACKGROUND_COLOR="#111111"
@@ -34,11 +41,4 @@ bindkey '^N' down-line-or-beginning-search
 
 alias config='/usr/bin/lazygit --path ~/dotfiles/'
 
-plugins=(
-  git
-  zsh-autosuggestions
-  zsh-syntax-highlighting
-)
-
 eval "$(starship init zsh)"
-
