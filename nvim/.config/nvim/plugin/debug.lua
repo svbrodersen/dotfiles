@@ -8,7 +8,8 @@ vim.pack.add {
 
   'https://github.com/nvim-neotest/nvim-nio.git',
   'https://github.com/nvim-neotest/neotest.git',
-  'https://github.com/fredrikaverpil/neotest-golang',
+  'https://github.com/nvim-lua/plenary.nvim',
+  'https://github.com/nvim-neotest/neotest-go',
   'https://github.com/rouge8/neotest-rust',
 }
 
@@ -156,10 +157,7 @@ require('neotest').setup {
       args = { '--no-capture' },
     },
 
-    require 'neotest-golang' {
-      go_test_args = { '-v', '-race', '-count=1', '-timeout=60s' },
-      dap_go_enabled = true, -- Smoothly hooks into your existing delve configurations
-    },
+    require 'neotest-go' {},
   },
 }
 
@@ -167,3 +165,21 @@ require('neotest').setup {
 vim.keymap.set('n', '<leader>td', function()
   require('neotest').run.run { strategy = 'dap' }
 end, { desc = 'Debug Nearest Test' })
+
+-- Neotest keymaps
+local neotest = require 'neotest'
+vim.keymap.set('n', '<leader>tr', function()
+  neotest.run.run()
+end, { desc = 'Run test' })
+
+vim.keymap.set('n', '<leader>tf', function()
+  neotest.run.run(vim.fn.expand '%')
+end, { desc = 'Run file tests' })
+
+vim.keymap.set('n', '<leader>tl', function()
+  neotest.run.run_last()
+end, { desc = 'Run last' })
+
+vim.keymap.set('n', '<leader>tt', function()
+  neotest.output_panel.toggle()
+end, { desc = 'Toggle output' })

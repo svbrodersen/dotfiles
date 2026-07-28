@@ -15,8 +15,6 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 -- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
 -- or just use <C-\><C-n> to exit terminal mode
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
-vim.keymap.set('n', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
-
 vim.keymap.set('n', '<C-w>x', '<C-w>q', { desc = 'Close window' })
 
 -- Highlight when yanking (copying) text
@@ -84,30 +82,38 @@ end, { desc = 'Update' })
 
 -- Resize
 local function resize_left(amount)
-  vim.cmd("wincmd h")
-  vim.cmd("vertical resize -" .. amount)
-  vim.cmd("wincmd l")
+  vim.cmd 'wincmd h'
+  vim.cmd('vertical resize -' .. amount)
+  vim.cmd 'wincmd l'
 end
 
 local function resize_right(amount)
-  vim.cmd("wincmd h")
-  vim.cmd("vertical resize +" .. amount)
-  vim.cmd("wincmd l")
+  vim.cmd 'wincmd h'
+  vim.cmd('vertical resize +' .. amount)
+  vim.cmd 'wincmd l'
 end
 
 local function resize_down(amount)
-  vim.cmd("wincmd k")
-  vim.cmd("resize +" .. amount)
-  vim.cmd("wincmd j")
+  vim.cmd 'wincmd k'
+  vim.cmd('resize +' .. amount)
+  vim.cmd 'wincmd j'
 end
 
 local function resize_up(amount)
-  vim.cmd("wincmd k")
-  vim.cmd("resize -" .. amount)
-  vim.cmd("wincmd j")
+  vim.cmd 'wincmd k'
+  vim.cmd('resize -' .. amount)
+  vim.cmd 'wincmd j'
 end
 
-vim.keymap.set('n', '<A-h>', function() resize_left(5) end)
-vim.keymap.set('n', '<A-l>', function() resize_right(5) end)
-vim.keymap.set('n', '<A-j>', function() resize_down(5) end)
-vim.keymap.set('n', '<A-k>', function() resize_up(5) end)
+vim.keymap.set('n', '<A-h>', function()
+  resize_left(5)
+end)
+vim.keymap.set('n', '<A-l>', function()
+  resize_right(5)
+end)
+vim.keymap.set('n', '<A-j>', function()
+  resize_down(5)
+end)
+vim.keymap.set('n', '<A-k>', function()
+  resize_up(5)
+end)

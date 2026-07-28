@@ -1,10 +1,9 @@
 vim.pack.add {
-  'https://github.com/nvim-tree/nvim-web-devicons',
   'https://github.com/nvim-lualine/lualine.nvim',
 }
 
 local function find_key(func)
-  for _, map in ipairs(vim.api.nvim_get_keymap('n')) do
+  for _, map in ipairs(vim.api.nvim_get_keymap 'n') do
     if map.callback == func then
       return map.lhs, map.desc
     end
@@ -12,7 +11,7 @@ local function find_key(func)
 end
 
 local function key_sort_val(lhs)
-  local fnum = lhs:match('<F(%d+)>')
+  local fnum = lhs:match '<F(%d+)>'
   if fnum then
     return 0, tonumber(fnum)
   end
@@ -25,14 +24,14 @@ local function dap_status()
     return ''
   end
   local actions = {
-    { dap.continue,      'Continue' },
-    { dap.step_over,     'Over' },
-    { dap.step_into,     'Into' },
-    { dap.step_back,     'Back' },
-    { dap.step_out,      'Out' },
+    { dap.continue, 'Continue' },
+    { dap.step_over, 'Over' },
+    { dap.step_into, 'Into' },
+    { dap.step_back, 'Back' },
+    { dap.step_out, 'Out' },
     { dap.run_to_cursor, 'RunCursor' },
-    { dap.restart,       'Restart' },
-    { dap.terminate,     'Terminate' },
+    { dap.restart, 'Restart' },
+    { dap.terminate, 'Terminate' },
   }
   local items = {}
   for _, action in ipairs(actions) do
@@ -75,4 +74,3 @@ require('lualine').setup {
     -- ... your other sections
   },
 }
-
