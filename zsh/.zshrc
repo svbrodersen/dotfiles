@@ -28,6 +28,7 @@ path=(
   "/usr/local/cuda-13/bin"
   "$PNPM_HOME"
   "$HOME/.opencode/bin"
+  "$HOME/Android/Sdk/cmdline-tools/latest/bin/"
   $path
 )
 
@@ -42,3 +43,5 @@ bindkey '^N' down-line-or-beginning-search
 alias config='/usr/bin/lazygit --path ~/dotfiles/'
 
 eval "$(starship init zsh)"
+
+source <(fzf --zsh)

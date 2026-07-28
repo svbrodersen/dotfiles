@@ -1,0 +1,33 @@
+snippet yewfc "New Yew function component"
+  #[derive(PartialEq, Properties)]
+  pub struct ${1:ComponentName}Props {}
+
+  #[component]
+  pub fn ${1}(props: &${1}Props) -> Html {
+    let ${1}Props {} = props;
+      html! {
+        <${2:div}>$0</${2}>
+      }
+  }
+
+snippet yewsc "New Yew struct component"
+  #[derive(PartialEq, Properties)]
+  pub struct ${1:ComponentName};
+
+  pub enum ${1}Msg {
+  }
+
+  impl Component for ${1} {
+    type Message = ${1}Msg;
+    type Properties = ();
+
+    fn create(ctx: &Context<Self>) -> Self {
+      Self
+    }
+
+    fn view(&self, ctx: &Context<Self>) -> Html {
+      html! {
+        $0
+      }
+    }
+  }
